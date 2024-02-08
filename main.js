@@ -1,5 +1,5 @@
 const express = require("express");
-const api = require("./FinFriendApi.js");
+const api = require("./FinApi.js");
 const app = express();
 const port = 3000;
 
