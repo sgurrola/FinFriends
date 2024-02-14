@@ -1,6 +1,7 @@
 const express = require("express");
 const api = require("./FinApi.js");
 const app = express();
+const mysql = require("mysql");
 const port = 3000;
 
 app.get("/", function (req, res) {
