@@ -1,6 +1,5 @@
 CREATE TABLE USERS (
-    user_id         INTEGER NOT NULL PRIMARY KEY,
-    username        VARCHAR(30) UNIQUE NOT NULL,
+    username        VARCHAR(30) UNIQUE NOT NULL PRIMARY KEY,
     keypass         VARCHAR(30) NOT NULL,
     first_name      VARCHAR(20),
     last_name       VARCHAR(20),
