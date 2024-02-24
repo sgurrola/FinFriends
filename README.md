@@ -9,3 +9,6 @@ Hello! We can use this as a log I suppose.
     Next task now that we have the data in database is to sync it to the actual program and website, but need to then add in ways to sign up users (log in page) and how thatll work in the code
 
     I didn't run the sql code in my own terminal bc want to do all group mod and suggestions first, I'm hoping theres a way to just have that all here
+
+2/24 Jose
+    Ryan and I added the HTML, CSS, and JavaScript files for the Login/Sign-Up and Home pages.
