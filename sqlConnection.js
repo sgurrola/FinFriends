@@ -1,8 +1,12 @@
+const express = require('express');
+const app = express();
 const mysql = require("mysql");
+
 let db_con = mysql.createConnection({
     host:"localhost",
-    user: "root",
-    password: ''
+    user: "finfriendAccess",
+    password: '',
+    database: "finfriend_test"
 });
 
 db_con.connect((err) => {
