@@ -3,10 +3,7 @@ CREATE TABLE USERS (
     keypass         VARCHAR(30) NOT NULL,
     first_name      VARCHAR(20),
     last_name       VARCHAR(20),
-    street          VARCHAR(30) NOT NULL,
-    apt_num         VARCHAR(5),
-    city            VARCHAR(20) NOT NULL,
-    zip             INTEGER NOT NULL,
+    seller          BOOLEAN NOT NULL,
     admin_perms     BOOLEAN NOT NULL
 );
 
