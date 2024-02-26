@@ -19,6 +19,16 @@ db_con.connect((err) => {
 
 module.exports = db_con;
 
+function userExists(user) {
+    db_con.query('SELECT * FROM users WHERE username = "user"', (err, rows) => {   
+        if (err) {
+            return true; //currently does nothing, need to 
+        } else {
+            return false;
+        };
+    });
+}
+
 /*
 const express = require("express"); 
 const database = require('./sqlConnection'); 

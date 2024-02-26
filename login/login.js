@@ -1,3 +1,5 @@
+//import { userExists } from "../sqlConnection";
+
 function login()
 {
     
@@ -8,9 +10,15 @@ function login()
         alert("Please fill all fields");
         return;
     }
-
-    console.log("Entered with username:",user,"and password:",pass);
-    window.location.href = ("/home.html");
+    //add if for user not existing
+    /*
+    if (userExists(user) == false) {
+        alert("user does not exist!");
+        return;
+    } else { */
+        console.log("Entered with username:",user,"and password:",pass);
+        window.location.href = ("/home.html");
+    //};
 }
 
 function signup(){
