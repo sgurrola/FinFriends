@@ -1,5 +1,5 @@
 const express = require('express');
-const { userExists } = require('./database');
+const { userExists,passwordCheck } = require('./database');
 
 
 function handleLogin(req, res) {
@@ -16,8 +16,19 @@ function handleLogin(req, res) {
         
         if (exists) {
             console.log('Mark3');
-            res.json({ message: 'User exists', password: password });
-
+           // res.json({ message: 'User exists', password: password });
+           passwordCheck(username, password, (err, match) => {
+            if (err) {
+                console.error('Error checking password:', err);
+                return;
+            }
+            if (match) {
+                res.render('home');
+                console.log('Password matches.');
+            } else {
+                console.log('Password does not match.');
+            }
+        });
            // res.render('login', { error: 'User exists, password is -> ', password });
         } else {
             console.log('mark4');
@@ -30,6 +41,7 @@ function handleLogin(req, res) {
     });
 }
 
-module.exports = { handleLogin};//, router };
+
+module.exports = { handleLogin};
 
 

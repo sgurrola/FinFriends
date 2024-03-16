@@ -1,90 +1,48 @@
-/* login.css */
-
-/* Style for the entire page */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-/* Style for the top header */
-.top-page {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-}
-
-.top-page h1 {
-    margin: 0;
-}
-
-/* Style for the navigation bar */
-.navbar ol {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar ol li {
-    display: inline;
-    margin-right: 20px;
-}
-
-.navbar ol li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-/* Style for the login container */
 .login-container {
-    width: 300px;
-    margin: 50px auto;
-    background-color: #fff;
+    text-align: center; /* Horizontal centering */
+    justify-content: center; /* Horizontal centering */
+    background-color: #bde3ff;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.login-container p {
-    font-size: 20px;
-    margin-bottom: 20px;
-}
-
-.login-container label {
-    font-size: 16px;
-}
-
-.login-container input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.login-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.login-container button:hover {
-    background-color: #555;
-}
-
-/* Style for the new user container */
-.new-container {
+    border: 2px solid #333;
+    border-radius: 10px;
     width: 300px;
-    margin: 20px auto;
-    text-align: center;
+    margin: 0 auto;
+
 }
 
-.new-container p {
-    font-size: 16px;
+.new-container {
+    text-align: center; /* Horizontal centering */
+    justify-content: center; /* Horizontal centering */
+    background-color: #ffcd29;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    width: 300px;
+    margin: 0 auto;
+
 }
 
+
+.top-page{
+    color:black;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+
+}
+
+.navbar {
+    display: flex;
+}
+
+.navbar ol{
+    list-style-type: none;
+    padding:0;
+    margin:0;
+}
+
+.navbar li{
+    display: inline-block;
+    margin-right:10px;
+}
