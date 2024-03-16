@@ -1,66 +1,35 @@
-const sqlConnection = require("./sqlConnection");
-const express = require("express");
-const router = express.Router();
-//const {passwordCheck} = require("./sqlConnection");
-//const {createUser} = require("./sqlConnection");
-router.get("/", function (req, res) {
-    res.render("login");
-});
+const express = require('express');
+const { userExists } = require('./database');
 
-router.post("/", function (req, res) { //look into next function for router
-    login();
-    //const result = login();
-    //do stuff based on response in login()
-    
-});
 
-function login()
-{
-    //move to ejs w scripttag at top can have separate file for more complex
-    const user = document.getElementById("username").value;
-    const pass = document.getElementById("keypass").value;
+function handleLogin(req, res) {
+    const { username, password } = req.body; // Assuming username and password are sent in the request body
 
-    if(user === "" || pass === ""){ 
-        alert("Please fill all fields");
-        return;
-    }
-    //console.log("Entered with username:",user,"and password:",pass);
-    //window.location.href = ("/home.html");
-    try {
-        const exists = sqlConnection.userExists(user);
+    // Check if the user exists
+    userExists(username, (err, exists) => {
+        console.log('Mark 1');
+        if (err) {
+            console.log('Mark2');
+            // Handle database error
+            return res.status(500).send('Error checking user existence');
+        }
         
-        if(exists) {
-            alert("user exists"); //change from alert to response or message
-            //put in password check
+        if (exists) {
+            console.log('Mark3');
+            res.json({ message: 'User exists', password: password });
+
+           // res.render('login', { error: 'User exists, password is -> ', password });
+        } else {
+            console.log('mark4');
+            res.json({ message: 'does not exists', username: username });
+
+            //res.render('login', { error: 'User does not exist' });
         }
-        else {
-            alert("user does not exist");
-        }
-    }
-    catch (error){
-        console.error("Error during login:", error);
-        alert("An error occurred during login");
-    }
+        console.log('end of checks ');
+
+    });
 }
 
-function signup(){
-    const user = document.getElementById("create-username").value;
-    const pass = document.getElementById("create-keypass").value;
-    const first = document.getElementById("first_name").value;
-    const form = document.getElementById("account-type-form");
-    const isCustomerChecked = document.getElementById("customer").checked;
-    const isSellerChecked = document.getElementById("seller").checked;
-    if (!isCustomerChecked && !isSellerChecked) {
-    alert("Please select an account type");
-    return false;
-    console.log("New account created with username:", user, ",password:",pass,",and first name:",first);
-    if(user === "" || pass === "" || first === ""){
-        alert("Please fill all fields");
-        return;
-    }
-    window.location.href = ("/home.html");
-}
-}
+module.exports = { handleLogin};//, router };
 
-module.exports = router;
 
