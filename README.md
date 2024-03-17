@@ -12,3 +12,7 @@ Hello! We can use this as a log I suppose.
 
 2/24 Jose
     Ryan and I added the HTML, CSS, and JavaScript files for the Login/Sign-Up and Home pages.
+
+
+3/17 Daisy
+    I was able to get minimal usuability with the database and our website working, I think we should have a good base now on how to route functions and pages. Since I set it up on my desktop I will have access to it but I can turn on the live when you want to see how the ejs pages look because I think node needs to be running for them to work. 
