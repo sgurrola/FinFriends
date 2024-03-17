@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>login</title>
+    <link rel="stylesheet" type="text/css" href="../styles/login.css" />
+
+    <meta charset="UTF-8" />
+
+    <div class="top-page">
+        <h1>FinFriends</h1>
+        <nav class="navbar">
+            <ol>
+                <li><a href="/login">Login/Sign-up</a></li>
+                <li><a>Profile</a></li>
+                <li><a>Cart</a></li>
+            </ol>
+        </nav>
+    </div>
+</head>
+<body>
+    <div class="login-container">
+        <p>Login</p>
+        <form action="/login" method="post">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br><br>
+            <label for="keypass">Password:</label><br>
+            <input type="password" id="password" name="password"><br><br>
+            <button type="submit">Login</button>
+        </form>        
+    </div>
+    <div class="new-container">
+        <p>New User? Create account</p>
+        <!-- Add registration form or link to registration page -->
+        <form action="/create" method="post">
+            <label for="newusername">Username:</label><br>
+            <input type="text" id="newusername" name="username"><br><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="newpassword" name="password"><br><br>
+            <label for="first_name">First Name:</label><br>
+            <input type="text" id="first_name" user="first_name"><br><br>
+        </form> 
+    </div>
+    <script src="../middleware/login.js" defer></script> <!-- Include login script -->
+</body>
+</html>
