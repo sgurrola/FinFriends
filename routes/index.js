@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 const {handleLogin} = require('../middleware/login');
+const {handleSignup} = require('../middleware/signup');
 var connection = require('../middleware/database').databaseConnection;
 
 
@@ -16,6 +17,16 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', handleLogin);
+
+
+router.get('/signup', (req, res) =>{
+    res.render('signup');
+})
+
+router.post('/signup',handleSignup);
+
+
+
 
 //check data is being accessible 
 router.get('/data', (req, res) => {
