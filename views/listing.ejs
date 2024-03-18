@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listing Page</title>
+</head>
+<body>
+    <h1>Fish Inventory</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Availability</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% fishInventory.forEach(fish => { %>
+                <tr>
+                    <td><%= fish.fish_id %></td>
+                    <td><%= fish.fish_name %></td>
+                    <td><%= fish.price %></td>
+                    <td><%= fish.in_stock %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+</body>
+</html>
