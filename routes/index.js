@@ -2,8 +2,8 @@
 
 var express = require('express');
 var router = express.Router();
-const { handleLogin,validateForm} = require('../middleware/login');
-
+const {handleLogin} = require('../middleware/login');
+var connection = require('../middleware/database').databaseConnection;
 
 
 //Get home page
@@ -17,6 +17,21 @@ router.get('/login', (req, res) => {
 
 router.post('/login', handleLogin);
 
+//check data is being accessible 
+router.get('/data', (req, res) => {
 
+    let sql = 'SELECT * FROM users';
+    
+    connection.query(sql, (err, result) => {
+    
+    if (err) throw err;
+    
+    console.log(result);
+    
+    res.send('users received');
+    
+    });
+    
+    });
 
 module.exports = router;
