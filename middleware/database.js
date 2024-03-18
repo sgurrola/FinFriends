@@ -48,9 +48,10 @@ function insertUser(username,password,first_name,last_name,address_1, address_2,
     }
     callback(null,result.insertId);
   });
-
-
 }
+
+
+
 
 
 //

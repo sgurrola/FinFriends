@@ -25,6 +25,17 @@ router.get('/signup', (req, res) =>{
 
 router.post('/signup',handleSignup);
 
+router.get('/listing',(req,res) => {
+    const sql = 'SELECT * from fish_inventory';
+    connection.query(sql,(err,rows) => {
+        if(err){
+            console.error('Error executing query: ', err);
+            return;
+        }
+        res.render('listing',{fishInventory : rows});
+    });
+
+});
 
 
 
