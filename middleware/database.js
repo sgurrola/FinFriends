@@ -40,12 +40,22 @@ function passwordCheck(username, password, callback) {
   });
 }
 
+function insertUser(username,password,first_name,last_name,address_1, address_2, city,state,zip, callback){
+  let sql = 'INSERT INTO users (username,keypass,first_name,last_name,street,apt_num,city,state,zip,admin_perms) VALUES (?,?,?,?,?,?,?,?,?,FALSE)';
+  connection.query(sql,[username,password,first_name,last_name,address_1,address_2,city,state,zip], (err,result) =>{
+    if (err){
+      return callback(err);
+    }
+    callback(null,result.insertId);
+  });
 
+
+}
 
 
 //
 
 module.exports = {
-  userExists,passwordCheck,
+  userExists,passwordCheck,insertUser,
   databaseConnection: connection
 };

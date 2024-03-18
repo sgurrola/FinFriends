@@ -4,8 +4,9 @@ CREATE TABLE USERS (
     first_name      VARCHAR(20),
     last_name       VARCHAR(20),
     street          VARCHAR(30) NOT NULL,
-    apt_num         VARCHAR(5),
+    apt_num         VARCHAR(20),
     city            VARCHAR(20) NOT NULL,
+    state           VARCHAR(50) NOT Null,
     zip             INTEGER NOT NULL,
     admin_perms     BOOLEAN NOT NULL
 );
