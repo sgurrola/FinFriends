@@ -5,6 +5,8 @@ var router = express.Router();
 const {handleLogin} = require('../middleware/login');
 const {handleSignup} = require('../middleware/signup');
 var connection = require('../middleware/database').databaseConnection;
+var fs = require("fs");
+
 
 
 //Get home page
@@ -18,12 +20,17 @@ router.get('/login', (req, res) => {
 
 router.post('/login', handleLogin);
 
+router.get('/home',(req,res) =>{
+    res.render('home');
+
+});
 
 router.get('/signup', (req, res) =>{
     res.render('signup');
 })
 
 router.post('/signup',handleSignup);
+
 
 router.get('/listing',(req,res) => {
     const sql = 'SELECT * from fish_inventory';
@@ -35,6 +42,15 @@ router.get('/listing',(req,res) => {
         res.render('listing',{fishInventory : rows});
     });
 
+});
+
+router.get('/prod_page',(req,res) => {
+    res.render('prod_page');
+
+});
+///trying to figure out why images wont load
+router.get('/image',(req,res) =>{
+    res.render('imageTest');
 });
 
 

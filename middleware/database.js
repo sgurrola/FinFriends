@@ -51,12 +51,22 @@ function insertUser(username,password,first_name,last_name,address_1, address_2,
 }
 
 
+function isAdmin(username,callback){
+  let sql = 'SELECT * FROM users WHERE username = ? AND admin_perms = 1';
+  connection.query(sql, [username], (err, results) => {
+      if (err) {
+          return callback(err);
+      }
+      callback(null, results.length > 0);
+  });
+
+}
 
 
 
 //
 
 module.exports = {
-  userExists,passwordCheck,insertUser,
+  userExists,passwordCheck,insertUser,isAdmin,
   databaseConnection: connection
 };
