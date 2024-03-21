@@ -1,5 +1,5 @@
 const express = require('express');
-const { insertUser } = require('./database');
+const { insertUser,userExists } = require('./database');
 
 
 
@@ -19,6 +19,7 @@ function handleSignup(req,res){
 
 
 }
+
 
 
 module.exports = {handleSignup};
