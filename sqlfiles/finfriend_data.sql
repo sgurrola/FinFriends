@@ -1,5 +1,5 @@
 CREATE TABLE USERS (
-     username        VARCHAR(30) UNIQUE NOT NULL PRIMARY KEY,
+    username        VARCHAR(30) UNIQUE NOT NULL PRIMARY KEY,
     keypass         VARCHAR(30) NOT NULL,
     first_name      VARCHAR(20),
     last_name       VARCHAR(20),
@@ -25,3 +25,5 @@ CREATE TABLE ALT_INVENTORY (
     in_stock        BOOLEAN
 );
 
+INSERT INTO USERS (username, keypass, first_name, last_name, street, apt_num, city, state, zip, admin_perms)
+VALUES ('dnieto', 'pass123', 'Daisy', 'Nieto', '123 Main', NULL, 'San Antonio', 'Texas', 12345, TRUE);

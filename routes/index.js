@@ -44,14 +44,28 @@ router.get('/listing',(req,res) => {
 
 });
 
-router.get('/prod_page',(req,res) => {
-    res.render('prod_page');
+router.get('/prodpage',(req,res) => {
+    const fishName = req.query.fishName;
+    const sql = 'SELECT * from fish_inventory where fish_name = ?';
+
+    connection.query(sql,[fishName],(err,result) =>{
+        if(err){
+            console.error('Error finding fish', err);
+            return;
+        }
+         // Check if result is empty (no fish found)
+         if (result.length === 0) {
+            res.status(404).send('Fish not found');
+            return;
+        }
+        res.render('prodpage',{fish:result[0]} );
+
+    });
 
 });
-///trying to figure out why images wont load
-router.get('/image',(req,res) =>{
-    res.render('imageTest');
-});
+
+
+
 
 
 

@@ -20,7 +20,7 @@
             <% fishInventory.forEach(fish => { %>
                 <tr>
                     <td><%= fish.fish_id %></td>
-                    <td><%= fish.fish_name %></td>
+                    <td><a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>"><%= fish.fish_name %></a></td>
                     <td><%= fish.price %></td>
                     <td><%= fish.in_stock %></td>
                 </tr>
@@ -28,7 +28,7 @@
         </tbody>
     </table>
     <div class="new-container">
-        <p>Fish redirect <a href="/prod-page">Click here</a></p>
+        <p>Fish redirect <a href="/prodpage">Click here</a></p>
         <!-- Add registration form or link to registration page -->
         
     </div>

@@ -32,6 +32,7 @@ function handleLogin(req, res) {
                     if (exists) {res.render('home'); console.log('pass word matches and this is an admin');}
                     else{res.render('home'); console.log('password matches and this is an regular user');}
 
+        
                 });
                // res.render('home');
                 //console.log('Password matches.');
