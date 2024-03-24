@@ -29,8 +29,8 @@ function handleLogin(req, res) {
                 //check if is admin
                 isAdmin(username,(err,exists) =>{
                     if(err){console.error('Error checking admin status: ', err); return;}
-                    if (exists) {res.render('home'); console.log('pass word matches and this is an admin');}
-                    else{res.render('home'); console.log('password matches and this is an regular user');}
+                    if (exists) {res.render('home',{ isLoggedIn: true, username: username }); console.log('pass word matches and this is an admin');}
+                    else{res.render('home',{ isLoggedIn: true, username: username }); console.log('password matches and this is an regular user');}
 
         
                 });
@@ -50,6 +50,8 @@ function handleLogin(req, res) {
 
     });
 }
+
+
 
 module.exports = { handleLogin};
 

@@ -9,9 +9,24 @@
     <header class="top-page">
         <h1>FinFriends</h1>
         <nav class="navbar">
-            <ol>
-                <li><a href="/login">Login/Sign-up</a></li>
-                <li><a href="/listing">Listing</a></li>
+            <ol>                
+                <li>
+                    <li>
+                        <% if (isLoggedIn) { %>
+                            <a href="/">Log out</a>
+                        <% } else { %>
+                            <a href="/login">Login/Sign-up</a>
+                        <% } %>
+                    </li>
+                    
+                </li>
+                <li>
+                    <% if (isLoggedIn) { %>
+                        <a href="/listing?LoggedStatus=<%= encodeURIComponent(true) %>">Listing</a>
+                    <% } else { %>
+                        <a href="/listing?LoggedStatus=<%= encodeURIComponent(false) %>">Listing</a>
+                    <% } %>
+                </li>
                 <li><a>Profile</a></li>
                 <li><a>Cart</a></li>
             </ol>
@@ -19,8 +34,11 @@
     </header>
 
     <div class="home-img">
-        <h2>Your one-stop shop for all your fin friend things!</h2>
-        
+        <% if (isLoggedIn) { %>
+            <h2>Welcome back, <%= username %>!</h2>
+        <% } else { %>
+            <h2>Your one-stop shop for all your fin friend things!</h2>
+        <% } %>        
     </div>
     
     <div class="article-items">
