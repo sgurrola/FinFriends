@@ -62,9 +62,10 @@ function isAdmin(username,callback){
 
 }
 
+//function to insert to cart
+//takes in a username,product_id, inventory type
 
 
-//
 
 module.exports = {
   userExists,passwordCheck,insertUser,isAdmin,

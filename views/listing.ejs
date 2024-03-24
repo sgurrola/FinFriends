@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listing Page</title>
+    <link rel="stylesheet" type="text/css" href="../styles/login.css" />
+
 </head>
 <body>
     <h1>Fish Inventory</h1>
@@ -20,18 +22,18 @@
             <% fishInventory.forEach(fish => { %>
                 <tr>
                     <td><%= fish.fish_id %></td>
-                    <td><a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>"><%= fish.fish_name %></a></td>
+                    <td> <% if (isLoggedIn) { %>
+                        <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&LoggedStatus=<%= encodeURIComponent(true) %>"><%= fish.fish_name %></a>
+                        <% } else { %>
+                        <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&LoggedStatus=<%= encodeURIComponent(false) %>"><%= fish.fish_name %></a>
+                    <% } %></td>
+
                     <td><%= fish.price %></td>
                     <td><%= fish.in_stock %></td>
                 </tr>
             <% }); %>
         </tbody>
     </table>
-    <div class="new-container">
-        <p>Fish redirect <a href="/prodpage">Click here</a></p>
-        <!-- Add registration form or link to registration page -->
-        
-    </div>
     <script src="../middleware/listing.js" defer></script>
 </body>
 </html>

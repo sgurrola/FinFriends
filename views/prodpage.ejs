@@ -10,5 +10,11 @@
     <p>Fish Name: <%= fish.fish_name %></p>
     <p>Price: <%= fish.price %></p>
     <p>In Stock: <%= fish.in_stock %></p>
+    <% if (isLoggedIn) { %>       
+    <button id ="addtoCartButton" data-product-id=<%= fish.fish_id %>>Add to Cart</button>
+    <% } else { %>
+        <p>Please Log in to Add Items to Cart</p>
+    <% } %>
+   
 </body>
 </html>
