@@ -16,3 +16,6 @@ Hello! We can use this as a log I suppose.
 
 3/17 Daisy
     I was able to get minimal usuability with the database and our website working, I think we should have a good base now on how to route functions and pages. Since I set it up on my desktop I will have access to it but I can turn on the live when you want to see how the ejs pages look because I think node needs to be running for them to work. 
+
+3/24 Ryan
+    I was able to add css to the skeletal sign up page that was provided. I also fixed the problem with the images not loading on our pages. For future reference, instead of ../public/images/imageName for the src, do /images/imageName.
