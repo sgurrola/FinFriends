@@ -22,7 +22,7 @@
                 </li>
                 <li>
                     <% if (isLoggedIn) { %>
-                        <a href="/listing?LoggedStatus=<%= encodeURIComponent(true) %>">Listing</a>
+                        <a href="/listing?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Listing</a>
                     <% } else { %>
                         <a href="/listing?LoggedStatus=<%= encodeURIComponent(false) %>">Listing</a>
                     <% } %>

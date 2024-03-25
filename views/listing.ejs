@@ -4,8 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listing Page</title>
-    <link rel="stylesheet" type="text/css" href="../styles/login.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/signup.css" />
 
+    <div class="top-page">
+        <h1>FinFriends</h1>
+        <nav class="navbar">
+            <ol>
+                <li><% if (isLoggedIn) { %>
+                    <a href="/home?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Home</a>
+                <% } else { %>
+                    <a href="/home">Home</a>
+                <% } %></li>
+                <li>Listing</li>
+                <li><a>Profile</a></li>
+                <li><a>Cart</a></li>
+            </ol>
+        </nav>
+    </div>
+    
 </head>
 <body>
     <h1>Fish Inventory</h1>
@@ -23,7 +39,7 @@
                 <tr>
                     <td><%= fish.fish_id %></td>
                     <td> <% if (isLoggedIn) { %>
-                        <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&LoggedStatus=<%= encodeURIComponent(true) %>"><%= fish.fish_name %></a>
+                        <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&User=<%=encodeURIComponent(username)%>&LoggedStatus=<%= encodeURIComponent(true) %>"><%= fish.fish_name %></a>
                         <% } else { %>
                         <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&LoggedStatus=<%= encodeURIComponent(false) %>"><%= fish.fish_name %></a>
                     <% } %></td>
