@@ -21,7 +21,7 @@
 <body>
     <div class="signup-container">
         <p>Sign Up</p>
-        <form action="/signup" method="post">
+        <form id="signup-form" action="/signup" method="post" >
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username"><br><br>
             <label for="keypass">Password:</label><br>
@@ -41,8 +41,9 @@
             <label for="zip">Zip/Postal Code:</label><br>
             <input type="text" id="zip" name="zip"><br><br>
 
-            <button type="submit">Sign Up</button>
-        </form>        
+            <button id="CheckFields" type="submit">Sign Up</button>
+        </form> 
+         
     </div>
     
     <script src="../middleware/signup.js" defer></script> <!-- Include login script -->

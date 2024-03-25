@@ -25,8 +25,10 @@ router.post('/login', handleLogin);
 router.get('/home',(req,res) =>{
     const status = req.query.LoggedStatus;
     const isLoggedIn = status === 'true';
-    res.render('home',{isLoggedIn:isLoggedIn});
-    console.log({isLoggedIn: isLoggedIn});
+    const user = req.query.User;
+
+    res.render('home',{isLoggedIn:isLoggedIn, username:user});
+    console.log({isLoggedIn: isLoggedIn,username: user});
 
 
 });
@@ -37,18 +39,18 @@ router.get('/signup', (req, res) =>{
 
 router.post('/signup',handleSignup);
 
-
 router.get('/listing',(req,res) => {
     const sql = 'SELECT * from fish_inventory';
     const status = req.query.LoggedStatus;
     const isLoggedIn = status === 'true';
+    const user = req.query.User;
     connection.query(sql,(err,rows) => {
         if(err){
             console.error('Error executing query: ', err);
             return;
         }
-        res.render('listing', { isLoggedIn: isLoggedIn, fishInventory: rows });
-        console.log({isLoggedIn: isLoggedIn});
+        res.render('listing', { isLoggedIn: isLoggedIn, fishInventory: rows ,username:user });
+        console.log({isLoggedIn: isLoggedIn, username:user});
 
 
     });
@@ -60,6 +62,7 @@ router.get('/prodpage',(req,res) => {
     const sql = 'SELECT * from fish_inventory where fish_name = ?';
     const status = req.query.LoggedStatus;
     const isLoggedIn = status === 'true';
+    const user = req.query.User;
 
     connection.query(sql,[fishName],(err,result) =>{
         if(err){
@@ -71,8 +74,8 @@ router.get('/prodpage',(req,res) => {
             res.status(404).send('Fish not found');
             return;
         }
-        res.render('prodpage',{fish:result[0],isLoggedIn:isLoggedIn} );
-        console.log({isLoggedIn: isLoggedIn});
+        res.render('prodpage',{fish:result[0],isLoggedIn:isLoggedIn,username:user} );
+        console.log({isLoggedIn: isLoggedIn,username:user});
 
     });
 
