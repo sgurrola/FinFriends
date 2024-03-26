@@ -41,7 +41,7 @@
         <form action="/add-to-cart" method="post">
             <input type="hidden" name="username" value="<%= username %>">
             <input type="hidden" name="fish_name" value="<%= fish.fish_name %>">
-            <input type="hidden" name="price"   values="<%=fish.price%>">
+            <input type="hidden" name="price" value=<%= fish.price %>>
             <button type="submit" id="addtoCartButton">Add to Cart</button>
         </form>      
     <% } else { %>
@@ -67,7 +67,6 @@
         var formattedFishName = formatFishName(fishName);
         document.getElementById('fishImage').src = '/images/fishInventory/' + formattedFishName + '.jpeg';
     </script>
-        <script src="../middleware/prodpage.js"></script>
 
 </body>
 </html>
