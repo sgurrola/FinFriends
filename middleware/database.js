@@ -7,7 +7,6 @@ require('dotenv').config();
   password: 'Esteban10!',//process.env.DATABASE_PASSWORD,
   database: 'fin_friends'//process.env.DATABASE_NAME
 });*/
-
 var connection = mysql.createConnection({
   host: process.env.DATABASE_HOST,
   user: process.env.DATABASE_USER,
@@ -76,12 +75,91 @@ function addToCart(username,productName, inventoryType,price,callback){
   });
 }
 
+
+//remove from cart: (item._id, Inventory Type,callback), just delete that item from the table //similar functionality for owners
+
+
 ///create order not done
-function createOrder(username,callback){
-  //make order_id with user ID 
-  //then find most recent order_id with username and date to add each item in cart to items_in_order table
+function createOrder(username, subtotal, callback) {
+  // Calculate total with tax
+  var total = subtotal * 1.0825;
+  
+  // Initialize orderNum
+  var orderNum = 0;
+  
+  // Insert order into ORDERS table
+  let sql = 'INSERT INTO ORDERS (username, total) VALUES (?, ?)';
+  connection.query(sql, [username, total], (err, result) => {
+    if (err) {
+      return callback(err);
+    }
+
+    orderNum = result.insertId;
+    
+    //callback(null, orderNum);
+   
+    // Add items to the order
+    addItemsToOrder(username, orderNum,(err,result) =>{
+      if(err){
+        console.error('Error adding items to order', err);
+      }
+      if (result) {
+        console.log('items added to order');
+      }
+    });
+
+    // Remove items from the user's cart
+    removeFromCartItems(username, (err, result) => {
+      if (err) {
+        console.error('Error removing cart items after purchase:', err);
+      }
+      if (result) {
+        console.log('Cart should now be clear');
+      }
+    });
+
+  });
 
 }
+
+
+function addItemsToOrder(username,orderNum,callback){
+
+  
+  let sql = 'SELECT prod_name, inventory_type,quantity FROM user_cart where username = ?';
+  let sql2 = 'INSERT (order_id,prod_name, inventory_type, quantity) VALUES (?,?,?,?)';  
+  connection.query(sql,[username],(err,items) =>{
+      if (err){
+        return callback(err);
+      }
+      //callback(null,items);
+
+      items.forEach(row => {
+        connection.query(sql2,[orderNum,row.prod_name,row.inventory_type,row.quantity],(err,result));
+        if(err){
+          return callback(err);
+        }
+      });
+
+    });
+    callback(null,"Items inserted succesfully to order");
+
+}
+
+function removeFromCartItems(username,callback){
+
+  let sql = 'DELETE FROM user_cart WHERE username = ?';
+  connection.query(sql,[username],(err,result) =>{
+    if(err){
+      return callback(err);
+    }
+    callback(null,result);
+
+  });
+
+
+}//theser items are removed from cart since they are in order
+
 
 
 

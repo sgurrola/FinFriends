@@ -7,6 +7,7 @@ const {handleSignup} = require('../middleware/signup');
 const {addToDatabase} = require('../middleware/prodpage');
 var connection = require('../middleware/database').databaseConnection;
 var fs = require("fs");
+const {createOrder} = require('../middleware/database');
 
 
 
@@ -47,6 +48,35 @@ router.post('/add-to-cart',(req,res) =>{
 
     addToDatabase(username,fishname,'fish_inventory',fishPrice);
     res.redirect('back');
+
+});
+
+router.post('/go-to-checkout',(req,res) =>{
+    const username = req.body.username;
+    const sub = req.body.subtotal;
+   
+
+    console.log({user: username,cartSubtotal: sub});
+    res.render('checkout',{username:username, cartSubtotal: sub});
+
+
+});
+
+router.post('/confirm-order',(req,res)=>{
+    const username = req.body.username;
+    const sub = req.body.subtotal;
+
+    createOrder(username,sub,(err,result) =>{
+        if(err){
+            console.error('error creating order', err);
+        }
+        if(result){
+            console.log('Order Created');
+            res.json({ message: 'ORDER IS ON THE WAY!!!', username: username });
+
+        }
+    });
+
 
 });
 
