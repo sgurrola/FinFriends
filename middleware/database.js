@@ -66,7 +66,8 @@ function isAdmin(username,callback){
 //takes in a username,product_id, inventory type
 
 function addToCart(username,productName, inventoryType,price,callback){
-  let sql = 'INSERT INTO USER_CART (username,prod_name,inventory_type,price,quantity) VALUES (?,?,?,?,1)';
+
+  let sql = 'INSERT INTO USER_CART (username,prod_name,inventory_type,quantity,price) VALUES (?,?,?,1,?)';
   connection.query(sql, [username,productName,inventoryType,price],(err,result) =>{
     if (err){
       return callback(err);

@@ -71,8 +71,8 @@ router.get('/cart',(req,res)=>{
     const status = req.query.LoggedStatus;
     const isLoggedIn = status === 'true';
     const user = req.query.User;
-    const sql = 'SELECT * from user_cart';
-    connection.query(sql,(err,rows) => {
+    const sql = 'SELECT * from user_cart where username = ?';
+    connection.query(sql,[user],(err,rows) => {
         if(err){
             console.error('Error executing query: ', err);
             return;

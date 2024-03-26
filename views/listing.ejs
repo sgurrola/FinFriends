@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listing Page</title>
-    <link rel="stylesheet" type="text/css" href="../styles/signup.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/listing.css" />
 
     <div class="top-page">
         <h1>FinFriends</h1>
@@ -36,6 +36,7 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Availability</th>
+                <th>Image</th>
             </tr>
         </thead>
         <tbody>
@@ -50,9 +51,14 @@
 
                     <td><%= fish.price %></td>
                     <td><%= fish.in_stock %></td>
+                    <td>
+                        
+
+                    </td>
                 </tr>
             <% }); %>
         </tbody>
     </table>
+
 </body>
 </html>
