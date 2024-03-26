@@ -76,9 +76,66 @@ function addToCart(username,productName, inventoryType,price,callback){
 }
 
 
+
+async function createOrder(username, subtotal, callback) {
+  try {
+    // Calculate total with tax
+    const total = subtotal * 1.0825;
+    
+    // Insert order into ORDERS table
+    const orderInsertResult = await insertOrder(username, total);
+    const orderNum = orderInsertResult.insertId;
+    
+    // Add items to the order
+    await addItemsToOrder(username, orderNum);
+    
+    // Remove items from the user's cart
+    await removeFromCartItems(username);
+
+    console.log('Order created successfully');
+    callback(null, orderNum);
+  } catch (err) {
+    console.error('Error creating order:', err);
+    callback(err);
+  }
+}
+
+async function insertOrder(username, total) {
+  const sql = 'INSERT INTO ORDERS (username, total) VALUES (?, ?)';
+  return await query(sql, [username, total]);
+}
+
+async function addItemsToOrder(username, orderNum) {
+  const sqlSelect = 'SELECT prod_name, inventory_type, quantity FROM user_cart WHERE username = ?';
+  const sqlInsert = 'INSERT INTO items_in_order (order_id, prod_name, inventory_type, quantity) VALUES (?, ?, ?, ?)';
+  const items = await query(sqlSelect, [username]);
+
+  for (const item of items) {
+    await query(sqlInsert, [orderNum, item.prod_name, item.inventory_type, item.quantity]);
+  }
+}
+
+async function removeFromCartItems(username) {
+  const sql = 'DELETE FROM user_cart WHERE username = ?';
+  return await query(sql, [username]);
+}
+
+async function query(sql, values) {
+  return new Promise((resolve, reject) => {
+    connection.query(sql, values, (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
+
 //remove from cart: (item._id, Inventory Type,callback), just delete that item from the table //similar functionality for owners
 
-
+/*
 ///create order not done
 function createOrder(username, subtotal, callback) {
   // Calculate total with tax
@@ -127,7 +184,7 @@ function addItemsToOrder(username,orderNum,callback){
 
   
   let sql = 'SELECT prod_name, inventory_type,quantity FROM user_cart where username = ?';
-  let sql2 = 'INSERT (order_id,prod_name, inventory_type, quantity) VALUES (?,?,?,?)';  
+  let sql2 = 'INSERT into items_in_order (order_id,prod_name, inventory_type, quantity) VALUES (?,?,?,?)';  
   connection.query(sql,[username],(err,items) =>{
       if (err){
         return callback(err);
@@ -158,7 +215,7 @@ function removeFromCartItems(username,callback){
   });
 
 
-}//theser items are removed from cart since they are in order
+}*///theser items are removed from cart since they are in order
 
 
 

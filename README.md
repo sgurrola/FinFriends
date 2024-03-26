@@ -21,4 +21,4 @@ Hello! We can use this as a log I suppose.
     I was able to add css to the skeletal sign up page that was provided. I also fixed the problem with the images not loading on our pages. For future reference, instead of ../public/images/imageName for the src, do /images/imageName.
 
 3/26 Daisy
-    Added basic cart functionality we just need the admin functionality.
+    I was able to get it so that user can now checkout what is in their cart and get a subtotal and a total and they can make a purchase which will insert all the information and order information into the database sucessfully. The last bit on database end is creating so administration functionality to add and delete products from the listing. If you guys find any bugs along the way while creating style sheets or not understanding a piece of code I wrote just let me know. I will start writing down documention for every function I made. 
