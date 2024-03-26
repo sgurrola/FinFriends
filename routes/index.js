@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 const {handleLogin} = require('../middleware/login');
 const {handleSignup} = require('../middleware/signup');
+const {addToDatabase} = require('../middleware/prodpage');
 var connection = require('../middleware/database').databaseConnection;
 var fs = require("fs");
 
@@ -39,6 +40,16 @@ router.get('/signup', (req, res) =>{
 
 router.post('/signup',handleSignup);
 
+router.post('/add-to-cart',(req,res) =>{
+    const username = req.body.username;
+    const fishname = req.body.fish_name;
+    const fishPrice = req.body.price;
+
+    addToDatabase(username,fishname,'fish_inventory',fishPrice);
+    res.redirect('back');
+
+});
+
 router.get('/listing',(req,res) => {
     const sql = 'SELECT * from fish_inventory';
     const status = req.query.LoggedStatus;
@@ -54,6 +65,22 @@ router.get('/listing',(req,res) => {
 
 
     });
+
+});
+router.get('/cart',(req,res)=>{
+    const status = req.query.LoggedStatus;
+    const isLoggedIn = status === 'true';
+    const user = req.query.User;
+    const sql = 'SELECT * from user_cart';
+    connection.query(sql,(err,rows) => {
+        if(err){
+            console.error('Error executing query: ', err);
+            return;
+        }
+        res.render('cart', { isLoggedIn: isLoggedIn, userCart: rows ,username:user });
+        console.log({isLoggedIn: isLoggedIn, username:user});
+    });
+
 
 });
 

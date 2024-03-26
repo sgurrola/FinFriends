@@ -28,7 +28,11 @@
                     <% } %>
                 </li>
                 <li><a>Profile</a></li>
-                <li><a>Cart</a></li>
+                <li><% if (isLoggedIn) { %>
+                    <a href="/cart?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Cart</a>
+                <% } else { %>
+                    <a>Cart</a>
+                <% } %></li>
             </ol>
         </nav>
     </header>

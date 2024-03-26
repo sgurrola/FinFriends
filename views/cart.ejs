@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <link rel="stylesheet" type="text/css" href="../styles/signup.css" />
+
+    <div class="top-page">
+        <h1>FinFriends</h1>
+        <nav class="navbar">
+            <ol>
+                <li><% if (isLoggedIn) { %>
+                    <a href="/home?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Home</a>
+                <% } else { %>
+                    <a href="/home">Home</a>
+                <% } %></li>
+                <li><% if (isLoggedIn) { %>
+                    <a href="/listing?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Listing</a>
+                <% } else { %>
+                    <a href="/listing">Listing</a>
+                <% } %></li>
+                <li><a>Profile</a></li>
+                <li><a>Cart</a></li>
+                
+            </ol>
+        </nav>
+    </div>
+    
+</head>
+<body>
+    <h1>Cart Status</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Inventory Type</th>
+                <th> Price </th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% userCart.forEach(item => { %>
+                <tr>
+                    <td><%= item.prod_name %></td>
+                    <td><%= item.inventory_type %></td>
+                    <td><%= item.price %></td>
+                    <td><%= item.quantity %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>
