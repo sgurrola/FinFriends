@@ -1,10 +1,7 @@
 var express = require("express");
 var app = express();
 var PORT = process.env.PORT || 3000;
-const { handleLogin,router } = require('./middleware/login');
-
-// Import database connection
-var connection = require('./middleware/database').databaseConnection;
+const indexRouter = require('./routes/index');
 
 ///fixes css file template
 // Middleware to set Content-Type for CSS files
@@ -14,7 +11,7 @@ app.use('/styles', (req, res, next) => {
     }
     next();
 });
-
+app.use(express.static('images'));
 // Serve static files from the 'styles' directory
 app.use('/styles', express.static('styles'));
 //////
@@ -30,19 +27,9 @@ app.set("view engine","ejs");
 
 // Serve static files from the public directory
 app.use(express.static('public'));
+app.use(express.static('middleware'));
 
-// Route to render the home page
-app.get('/',  (req, res) => {
-    res.render('home'); //render willl look into a views folder
-});
-
-// Route to render the login page (GET request)
-app.get('/login', (req, res) => {
-    res.render('login');
-});
-
-// Route to handle login form submission (POST request)
-app.post('/login', handleLogin);
+app.use('/', indexRouter);
 
 
 
@@ -52,26 +39,3 @@ app.listen(PORT, () => {
 });
 
 
-
-
-
-/*
-
-
-app.get('/login', (req, res) => {
-
-    let sql = 'SELECT * FROM users';
-    
-    connection.query(sql, (err, result) => {
-    
-    if (err) throw err;
-    
-    console.log(result);
-    
-    res.send('users received');
-    
-    });
-    
-    });
-
-*/

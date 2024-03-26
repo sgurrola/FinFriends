@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <script src="../middleware/prodpage.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../styles/signup.css" />
+
+    <div class="top-page">
+        <h1>FinFriends</h1>
+        <nav class="navbar">
+            <ol>
+                <li><% if (isLoggedIn) { %>
+                    <a href="/home?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Home</a>
+                <% } else { %>
+                    <a href="/home">Home</a>
+                <% } %></li>
+                <li><% if (isLoggedIn) { %>
+                    <a href="/listing?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Listing</a>
+                <% } else { %>
+                    <a href="/listing">Listing</a>
+                <% } %></li>
+                <li><a>Profile</a></li>
+                <li><% if (isLoggedIn) { %>
+                    <a href="/cart?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Cart</a>
+                <% } else { %>
+                    <a>Cart</a>
+                <% } %></li>
+            </ol>
+        </nav>
+    </div>
+</head>
+<body>
+    <h1>Product Details</h1>
+    <p>Fish Name: <%= fish.fish_name %></p>
+    <p>Price: <%= fish.price %></p>
+    <p>In Stock: <%= fish.in_stock %></p>
+    <% if (isLoggedIn) { %> 
+        <form action="/add-to-cart" method="post">
+            <input type="hidden" name="username" value="<%= username %>">
+            <input type="hidden" name="fish_name" value="<%= fish.fish_name %>">
+            <input type="hidden" name="price" value=<%= fish.price %>>
+            <button type="submit" id="addtoCartButton">Add to Cart</button>
+        </form>      
+    <% } else { %>
+        <p>Please Log in to Add Items to Cart</p>
+    <% } %>
+
+        
+
+    <div class="image" id="fish-image">
+        <!-- Constructing dynamic file path for the image src using JavaScript function -->
+        <img id="fishImage" alt="Fish image">
+        <p>Look at this adorable little guy.</p>
+    </div>
+    
+    <script>
+        // Function to convert fish name to lowercase and remove spaces
+        function formatFishName(name) {
+            return name.toLowerCase().replace(/\s+/g, '');
+        }
+    
+        // Retrieve fish name and construct dynamic image src
+        var fishName = '<%= fish.fish_name %>';
+        var formattedFishName = formatFishName(fishName);
+        document.getElementById('fishImage').src = '/images/fishInventory/' + formattedFishName + '.jpeg';
+    </script>
+
+</body>
+</html>

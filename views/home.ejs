@@ -9,17 +9,40 @@
     <header class="top-page">
         <h1>FinFriends</h1>
         <nav class="navbar">
-            <ol>
-                <li><a href="/login">Login/Sign-up</a></li>
+            <ol>                
+                <li>
+                    <li>
+                        <% if (isLoggedIn) { %>
+                            <a href="/">Log out</a>
+                        <% } else { %>
+                            <a href="/login">Login/Sign-up</a>
+                        <% } %>
+                    </li>
+                    
+                </li>
+                <li>
+                    <% if (isLoggedIn) { %>
+                        <a href="/listing?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Listing</a>
+                    <% } else { %>
+                        <a href="/listing?LoggedStatus=<%= encodeURIComponent(false) %>">Listing</a>
+                    <% } %>
+                </li>
                 <li><a>Profile</a></li>
-                <li><a>Cart</a></li>
+                <li><% if (isLoggedIn) { %>
+                    <a href="/cart?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Cart</a>
+                <% } else { %>
+                    <a>Cart</a>
+                <% } %></li>
             </ol>
         </nav>
     </header>
 
     <div class="home-img">
-        <h2>Your one-stop shop for all your fin friend things!</h2>
-        
+        <% if (isLoggedIn) { %>
+            <h2>Welcome back, <%= username %>!</h2>
+        <% } else { %>
+            <h2>Your one-stop shop for all your fin friend things!</h2>
+        <% } %>        
     </div>
     
     <div class="article-items">
@@ -38,7 +61,8 @@
     </div>
     
     <div class="about-us" id="about-us-section">
-        <img src="../images/fish-stock-image.jpeg" alt="Fish Stock Image" />
+        <img src="/images/fishy.jpeg" alt="Fish image">
+
         <p>We love fish.</p>
     </div>
 </body>
