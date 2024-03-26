@@ -19,3 +19,6 @@ Hello! We can use this as a log I suppose.
 
 3/24 Ryan
     I was able to add css to the skeletal sign up page that was provided. I also fixed the problem with the images not loading on our pages. For future reference, instead of ../public/images/imageName for the src, do /images/imageName.
+
+3/26 Daisy
+    Added basic cart functionality we just need the admin functionality.
