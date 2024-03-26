@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <link rel="stylesheet" type="text/css" href="../styles/cart.css" />
+
+    <div class="top-page">
+        <h1>FinFriends</h1>
+        <nav class="navbar">
+            <ol>
+                <li><a href="/home?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Home</a></li>
+                <li><a href="/listing?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Listing</a></li>
+                <li><a>Profile</a></li>
+                <li><a href="/cart?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Cart</a></li>
+                
+            </ol>
+        </nav>
+    </div>
+    
+</head>
+<body>
+    <h1>Checkout Order for <%= username %></h1>
+    <p>Confirm order details below</p>
+    <p>Subtotal: <%= cartSubtotal %></p>
+    <p>Total: <%= calculateTotal(cartSubtotal) %></p>
+
+    <form action="/confirm-order" method="post">
+        <input type="hidden" name="username" value="<%= username %>">
+        <input type="hidden" name="subtotal" value= <%= cartSubtotal %>>
+
+        <button type="submit" id="checkoutButton">Confirm</button>
+    </form>  
+    <% function calculateTotal(cartSubtotal) {
+        return cartSubtotal*(1.0825);
+    } %>
+</body>
+</html>
+

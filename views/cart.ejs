@@ -48,7 +48,24 @@
                     <td><%= item.quantity %></td>
                 </tr>
             <% }); %>
+            <tr>
+                <td colspan="2"><strong>Subtotal</strong></td>
+                <td><%= calculateSubtotal(userCart) %></td>
+            </tr>
+           
         </tbody>
     </table>
+    <form action="/go-to-checkout" method="post">
+        <input type="hidden" name="username" value="<%= username %>">
+        <input type="hidden" name="subtotal" value=<%= calculateSubtotal(userCart) %>>
+        <button type="submit" id="checkoutButton">Check Out</button>
+    </form>  
+    <% function calculateSubtotal(cart) {
+        let subtotal = 0;
+        cart.forEach(item => {
+            subtotal += item.price * item.quantity;
+        });
+        return subtotal;
+    } %>
 </body>
 </html>
