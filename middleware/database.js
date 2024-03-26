@@ -65,9 +65,27 @@ function isAdmin(username,callback){
 //function to insert to cart
 //takes in a username,product_id, inventory type
 
+function addToCart(username,productName, inventoryType,price,callback){
+  let sql = 'INSERT INTO USER_CART (username,prod_name,inventory_type,price,quantity) VALUES (?,?,?,?,1)';
+  connection.query(sql, [username,productName,inventoryType,price],(err,result) =>{
+    if (err){
+      return callback(err);
+    }
+    callback(null,result.insertId);
+  });
+}
+
+///create order not done
+function createOrder(username,callback){
+  //make order_id with user ID 
+  //then find most recent order_id with username and date to add each item in cart to items_in_order table
+
+}
+
+
 
 
 module.exports = {
-  userExists,passwordCheck,insertUser,isAdmin,
+  userExists,passwordCheck,insertUser,isAdmin,addToCart,createOrder,
   databaseConnection: connection
 };
