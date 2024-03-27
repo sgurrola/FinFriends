@@ -25,5 +25,31 @@ CREATE TABLE ALT_INVENTORY (
     in_stock        BOOLEAN
 );
 
+CREATE TABLE USER_CART (
+	cart_item_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    username        VARCHAR(30) NOT NULL,
+    prod_name       VARCHAR(30) NOT NULL,
+	inventory_type  VARCHAR(30) NOT NULL,
+	quantity        INTEGER NOT NULL,
+    FOREIGN KEY (username) REFERENCES USERS(username)
+);
+
+CREATE TABLE ORDERS(
+	order_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(30) NOT NULL,
+    order_date	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total 		decimal(10,2),
+    FOREIGN KEY (username) references users(username)
+);
+
+CREATE TABLE ITEMS_IN_ORDER(
+	item_id      INTEGER AUTO_INCREMENT PRIMARY KEY,
+    order_id    INTEGER,
+    prod_name 	VARCHAR(30) NOT NULL,
+    inventory_type varchar(30) NOT NULL,
+    quantity	INTEGER NOT NULL,
+	FOREIGN KEY (order_id) references orders(order_id)
+);
+
 INSERT INTO USERS (username, keypass, first_name, last_name, street, apt_num, city, state, zip, admin_perms)
 VALUES ('dnieto', 'pass123', 'Daisy', 'Nieto', '123 Main', NULL, 'San Antonio', 'Texas', 12345, TRUE);
