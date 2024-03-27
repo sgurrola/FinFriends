@@ -51,5 +51,21 @@ CREATE TABLE ITEMS_IN_ORDER(
 	FOREIGN KEY (order_id) references orders(order_id)
 );
 
+
+
+INSERT INTO fish_inventory (fish_id, fish_name,price,in_stock)
+VALUES (1,'Mandarinfish', 50,TRUE);
+
+INSERT INTO fish_inventory (fish_id, fish_name,price,in_stock)
+VALUES (2,'Blue Tang', 100,TRUE);
+
+INSERT INTO fish_inventory (fish_id, fish_name,price,in_stock)
+VALUES (3,'Australian Flathead Perch', 5000,TRUE),
+(4,'Neptune Grouper', 6000,TRUE),
+(5,'Golden Basslet', 8000,TRUE);
+
+
+
+
 INSERT INTO USERS (username, keypass, first_name, last_name, street, apt_num, city, state, zip, admin_perms)
 VALUES ('dnieto', 'pass123', 'Daisy', 'Nieto', '123 Main', NULL, 'San Antonio', 'Texas', 12345, TRUE);
