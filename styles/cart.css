@@ -5,37 +5,34 @@
     box-sizing: border-box;
 }
 
-/* Body styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+.checkout-button-container {
+    text-align: center;
 }
 
+
 /* Top page container */
-.top-page {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
+.top-page{
+    color:black;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
 }
 
 /* Navbar styles */
 .navbar {
-    margin-top: 10px;
-}
-
-.navbar ol {
-    list-style: none;
     display: flex;
 }
 
-.navbar ol li {
-    margin-right: 20px;
+.navbar ol{
+    list-style-type: none;
+    padding:0;
+    margin:0;
 }
 
-.navbar ol li a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
+.navbar li{
+    display: inline-block;
+    margin-right:10px;
 }
 
 /* Page title */

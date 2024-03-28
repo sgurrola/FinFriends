@@ -49,11 +49,14 @@
                         <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&LoggedStatus=<%= encodeURIComponent(false) %>"><%= fish.fish_name %></a>
                     <% } %></td>
 
-                    <td><%= fish.price %></td>
+                    <td>$<%= formatPrice(fish.price) %></td>
                     <td><%= fish.in_stock %></td>
-                    <td>
-                        
-
+                    <td>      
+                        <% 
+                        function formatPrice(price) {
+                            return parseFloat(price).toFixed(2); // Converts to float and formats to 2 decimal places
+                        }
+                        %>
                     </td>
                 </tr>
             <% }); %>
