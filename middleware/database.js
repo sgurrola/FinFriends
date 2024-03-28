@@ -171,7 +171,7 @@ function fishExists(fish_name, callback) {
 }
 
 function insertFish(fish_name,price,in_stock, callback){
-  let sql = 'INSERT INTO fish_inventory (fish_name,price,in_stock) VALUES (?,?,TRUE,FALSE)';
+  let sql = 'INSERT INTO fish_inventory (fish_name,price,in_stock) VALUES (?,?,TRUE)';
   connection.query(sql,[fish_name,price,in_stock], (err,result) =>{
     if (err){
       return callback(err);
@@ -180,8 +180,19 @@ function insertFish(fish_name,price,in_stock, callback){
   });
 }
 
+function removeFish(fish_name, callback) {
+  let sql = 'DELETE FROM fish_inventory WHERE fish_name = ?';
+  connection.query(sql,[fish_name],(err,result) =>{
+    if(err){
+      return callback(err);
+    }
+    callback(null,result);
+
+  });
+}
+
 
 module.exports = {
-  userExists,passwordCheck,insertUser,isAdmin,addToCart,createOrder,fishExists,insertFish,
+  userExists,passwordCheck,insertUser,isAdmin,addToCart,createOrder,fishExists,insertFish,removeFish,
   databaseConnection: connection
 };

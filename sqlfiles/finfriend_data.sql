@@ -12,7 +12,7 @@ CREATE TABLE USERS (
 );
 
 CREATE TABLE FISH_INVENTORY (
-    fish_id         INTEGER NOT NULL PRIMARY KEY,
+    fish_id         INTEGER Auto_increment PRIMARY KEY,
     fish_name       VARCHAR(30),
     price           INTEGER,
     in_stock        BOOLEAN,

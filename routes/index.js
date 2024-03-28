@@ -7,7 +7,8 @@ const {handleSignup} = require('../middleware/signup');
 const {addToDatabase} = require('../middleware/prodpage');
 var connection = require('../middleware/database').databaseConnection;
 var fs = require("fs");
-const {createOrder} = require('../middleware/database');
+const {createOrder,removeFish} = require('../middleware/database');
+const {handleStocking} = require('../middleware/product_add');
 
 
 
@@ -179,6 +180,22 @@ router.get('/data', (req, res) => {
     
     });
     
+});
+
+router.post('/remove-fish',(req,res) =>{
+    const fishname = req.body.fish_name;
+
+    
+    removeFish(fishname, (err,result) =>{
+        if(err){
+            console.log('Error removing');
+        }
+        if(result){
+            console.log('fish removed successfully:', fishname);
+            res.redirect('back');
+
+        }
     });
+});
 
 module.exports = router;
