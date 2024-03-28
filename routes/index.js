@@ -138,9 +138,30 @@ router.get('/prodpage',(req,res) => {
 
 });
 
+router.get('/product_add', (req, res) =>{
+    res.render('product_add');
+})
+
+router.post('/product_add',handleStocking);
+
+router.get('/admin_listing',(req,res) => {
+    const sql = 'SELECT * from fish_inventory';
+    const status = req.query.LoggedStatus;
+    const isLoggedIn = status === 'true';
+    const isAdmin = status === 'true';
+    const user = req.query.User;
+    connection.query(sql,(err,rows) => {
+        if(err){
+            console.error('Error executing query: ', err);
+            return;
+        }
+        res.render('admin_listing', { isLoggedIn: isLoggedIn, fishInventory: rows ,username:user });
+        console.log({isLoggedIn: isLoggedIn, username:user});
 
 
+    });
 
+});
 
 
 //check data is being accessible 
