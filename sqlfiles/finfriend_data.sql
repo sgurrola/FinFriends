@@ -1,3 +1,5 @@
+Create DATABASE fin_friends;
+
 CREATE TABLE USERS (
     username        VARCHAR(30) UNIQUE NOT NULL PRIMARY KEY,
     keypass         VARCHAR(30) NOT NULL,
@@ -13,7 +15,7 @@ CREATE TABLE USERS (
 );
 
 CREATE TABLE FISH_INVENTORY (
-    fish_id         INTEGER NOT NULL PRIMARY KEY,
+    fish_id         INTEGER AUTO_INCREMENT PRIMARY KEY,
     fish_name       VARCHAR(30),
     price           INTEGER,
     in_stock        BOOLEAN
