@@ -1,0 +1,83 @@
+.signup-container {
+    text-align: center; /* Horizontal centering */
+    justify-content: center; /* Horizontal centering */
+    background-color: #ffcd29;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.top-page{
+    color:black;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.navbar {
+    display: flex;
+}
+
+.navbar ol{
+    list-style-type: none;
+    padding:0;
+    margin:0;
+}
+
+.navbar li{
+    display: inline-block;
+    margin-right:10px;
+}
+
+.prodpageBackground{
+    display: flex;
+    justify-content: center;
+    background-color: cornflowerblue;
+    color:black;
+    padding: 60px;
+}
+
+.product-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.image {
+    height: 400px;
+    width: auto;
+}
+
+#fishImage {
+    height: 100%;
+    border-radius: 20px;
+    border: 8px solid black;
+}
+
+.fishDetails {
+    border: 1px solid black;
+    border-radius: 4px;
+    display: block;
+    text-align: center;
+    justify-content: center;
+    padding:20px;
+}
+
+button{
+    background-color: black;
+    color:white;
+    border-radius: 20px;
+    border:8px solid black;
+}
+
+.backgroundForAll{
+    background-color: cornflowerblue;
+}
+
+h2{
+    text-align: center;
+}
