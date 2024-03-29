@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,21 +21,16 @@
     </head>
 <body>
     <div class="stock-container">
-        <p>Sign Up</p>
+        <p>Add Fishduct</p>
         <form id="stock-form" action="/product_add" method="post" >
-            <label for="fish_id">ID Number:</label><br>
-            <input type="text" id="fish_id" name="fish_id"><br><br>
             <label for="fish_name">Fish Name:</label><br>
             <input type="text" id="fish_name" name="fish_name"><br><br>
             <label for="price">Price:</label><br>
             <input type="text" id="price" name="price"><br><br>
-            <label for="in_stock">In Stock? (type 1):</label><br>
-            <input type="text" id="in_stock" name="in_stock"><br><br>
             <button id="CheckFields" type="submit">Add</button>
         </form> 
          
     </div>
     
-    <script src="../middleware/product_add.js" defer></script> <!-- Include login script -->
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart Page</title>
-    <link rel="stylesheet" type="text/css" href="../styles/signup.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/cart.css" />
 
     <div class="top-page">
         <h1>FinFriends</h1>
@@ -23,8 +23,8 @@
 <body>
     <h1>Checkout Order for <%= username %></h1>
     <p>Confirm order details below</p>
-    <p>Subtotal: <%= cartSubtotal %></p>
-    <p>Total: <%= calculateTotal(cartSubtotal) %></p>
+    <p>Subtotal: $<%= formatPrice(cartSubtotal) %></p>
+    <p>Total: $<%= formatPrice(calculateTotal(cartSubtotal)) %></p>
 
     <form action="/confirm-order" method="post">
         <input type="hidden" name="username" value="<%= username %>">
@@ -35,6 +35,10 @@
     <% function calculateTotal(cartSubtotal) {
         return cartSubtotal*(1.0825);
     } %>
+    <% 
+    function formatPrice(price) {
+        return parseFloat(price).toFixed(2); // Converts to float and formats to 2 decimal places
+    }
+    %>
 </body>
 </html>
-

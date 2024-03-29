@@ -128,10 +128,45 @@ async function query(sql, values) {
 
 
 
+///adding delete / add products for admin
+function fishExists(fish_name, callback) {
+  let sql = 'SELECT * FROM fish_inventory WHERE fish_name = ?';
+  connection.query(sql, [fish_name], (err, results) => {
+      if (err) {
+          return callback(err);
+      }
+      callback(null, results.length > 0);
+  });
+}
+
+function insertFish(fish_name,price,in_stock, callback){
+  let sql = 'INSERT INTO fish_inventory (fish_name,price,in_stock) VALUES (?,?,TRUE)';
+  connection.query(sql,[fish_name,price,in_stock], (err,result) =>{
+    if (err){
+      return callback(err);
+    }
+    callback(null,result.insertId);
+  });
+}
+
+function removeFish(fish_name, callback) {
+  let sql = 'DELETE FROM fish_inventory WHERE fish_name = ?';
+  connection.query(sql,[fish_name],(err,result) =>{
+    if(err){
+      return callback(err);
+    }
+    callback(null,result);
+
+  });
+}
 
 
+
+
+
+//////
 
 module.exports = {
-  userExists,passwordCheck,insertUser,isAdmin,addToCart,createOrder,
+  userExists,passwordCheck,insertUser,isAdmin,addToCart,createOrder,fishExists, insertFish,removeFish,
   databaseConnection: connection
 };
