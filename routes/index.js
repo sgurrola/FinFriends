@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 const {handleLogin} = require('../middleware/login');
 const {handleSignup} = require('../middleware/signup');
+const {handleStocking} = require('../middleware/product_add');
 const {addToDatabase} = require('../middleware/prodpage');
 var connection = require('../middleware/database').databaseConnection;
 var fs = require("fs");
@@ -137,6 +138,12 @@ router.get('/prodpage',(req,res) => {
     });
 
 });
+
+router.get('/product_add', (req, res) =>{
+    res.render('product_add');
+})
+
+router.post('/product_add',handleStocking);
 
 
 
