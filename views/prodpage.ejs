@@ -6,7 +6,7 @@
     <title>Product Page</title>
     <script src="../middleware/prodpage.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="../styles/signup.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/prodpage.css" />
 
     <div class="top-page">
         <h1>FinFriends</h1>
@@ -33,28 +33,42 @@
     </div>
 </head>
 <body>
-    <h1>Product Details</h1>
-    <p>Fish Name: <%= fish.fish_name %></p>
-    <p>Price: <%= fish.price %></p>
-    <p>In Stock: <%= fish.in_stock %></p>
-    <% if (isLoggedIn) { %> 
-        <form action="/add-to-cart" method="post">
-            <input type="hidden" name="username" value="<%= username %>">
-            <input type="hidden" name="fish_name" value="<%= fish.fish_name %>">
-            <input type="hidden" name="price" value=<%= fish.price %>>
-            <button type="submit" id="addtoCartButton">Add to Cart</button>
-        </form>      
-    <% } else { %>
-        <p>Please Log in to Add Items to Cart</p>
-    <% } %>
-
+    <div class="backgroundForAll">
+    <h2>Product Details</h2>
+    <div class="prodpageBackground">
+        
+        <div class="product-container">
+            
+            <div class="image" id="fish-image">
+                <!-- Constructing dynamic file path for the image src using JavaScript function -->
+                <img id="fishImage" alt="Fish image">
+                <!-- <p>Look at this adorable little guy.</p> -->
+            </div>
+            <div class="fishDetails">
+                <h3>Fish Name:</h3>
+                <p><%= fish.fish_name %></p>
+                <h3>Price:</h3>
+                <p>$<%= fish.price %></p>
+                <h3>In Stock:</h3>
+                <p><%= fish.in_stock %></p>
+                <% if (isLoggedIn) { %> 
+                    <form action="/add-to-cart" method="post">
+                        <input type="hidden" name="username" value="<%= username %>">
+                        <input type="hidden" name="fish_name" value="<%= fish.fish_name %>">
+                        <input type="hidden" name="price" value=<%= fish.price %>>
+                        <button type="submit" id="addtoCartButton">Add to Cart</button>
+                    </form>      
+                <% } else { %>
+                    <p>Please Log in to Add Items to Cart</p>
+                <% } %>
+            </div>
+        </div>
+            
+    </div>
+    </div>
         
 
-    <div class="image" id="fish-image">
-        <!-- Constructing dynamic file path for the image src using JavaScript function -->
-        <img id="fishImage" alt="Fish image">
-        <p>Look at this adorable little guy.</p>
-    </div>
+    
     
     <script>
         // Function to convert fish name to lowercase and remove spaces

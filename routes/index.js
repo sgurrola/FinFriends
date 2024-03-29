@@ -7,7 +7,9 @@ const {handleSignup} = require('../middleware/signup');
 const {addToDatabase} = require('../middleware/prodpage');
 var connection = require('../middleware/database').databaseConnection;
 var fs = require("fs");
-const {createOrder} = require('../middleware/database');
+const {createOrder,removeFish} = require('../middleware/database');
+const {handleStocking} = require('../middleware/product_add');
+
 
 
 
@@ -137,12 +139,59 @@ router.get('/prodpage',(req,res) => {
     });
 
 });
+////
+router.get('/product_add', (req, res) =>{
+    res.render('product_add');
+})
+
+router.post('/product_add',handleStocking);
+
+router.get('/admin_listing',(req,res) => {
+    const sql = 'SELECT * from fish_inventory';
+    const status = req.query.LoggedStatus;
+    const isLoggedIn = status === 'true';
+    const isAdmin = status === 'true';
+    const user = req.query.User;
+    connection.query(sql,(err,rows) => {
+        if(err){
+            console.error('Error executing query: ', err);
+            return;
+        }
+        res.render('admin_listing', { isLoggedIn: isLoggedIn, fishInventory: rows ,username:user });
+        console.log({isLoggedIn: isLoggedIn, username:user});
+
+
+    });
+
+});
 
 
 
 
+////
 
 
+////
+
+
+router.post('/remove-fish',(req,res) =>{
+    const fishname = req.body.fish_name;
+
+    
+    removeFish(fishname, (err,result) =>{
+        if(err){
+            console.log('Error removing');
+        }
+        if(result){
+            console.log('fish removed successfully:', fishname);
+            res.redirect('back');
+
+        }
+    });
+});
+
+
+///
 //check data is being accessible 
 router.get('/data', (req, res) => {
 
@@ -159,5 +208,9 @@ router.get('/data', (req, res) => {
     });
     
     });
+
+
+
+
 
 module.exports = router;

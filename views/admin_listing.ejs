@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listing Page</title>
-    <link rel="stylesheet" type="text/css" href="../styles/listing.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/login.css" />
 
     <div class="top-page">
         <h1>FinFriends</h1>
@@ -36,7 +36,7 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Availability</th>
-                <th>Image</th>
+                <th>Remove?</th>
             </tr>
         </thead>
         <tbody>
@@ -49,19 +49,34 @@
                         <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&LoggedStatus=<%= encodeURIComponent(false) %>"><%= fish.fish_name %></a>
                     <% } %></td>
 
-                    <td>$<%= formatPrice(fish.price) %></td>
+                    <td><%= fish.price %></td>
                     <td><%= fish.in_stock %></td>
-                    <td>      
-                        <% 
-                        function formatPrice(price) {
-                            return parseFloat(price).toFixed(2); // Converts to float and formats to 2 decimal places
-                        }
-                        %>
+                    <td>
+                        <form action="/remove-fish" method="post">
+                            <input type="hidden" name="fish_name" value="<%= fish.fish_name %>">
+                            <input type="hidden" name="price" value=<%= fish.price %>>
+                            <button type="submit" id="removeFishButton"> remove <%= fish.fish_name %></button>
+                        </form>      
+                        
                     </td>
                 </tr>
             <% }); %>
         </tbody>
-    </table>
-
+    </table> 
+    
+        <div class="stock-container">
+            <p>Add Fish</p>
+            <form id="stock-form" action="/product_add" method="post" >
+                <label for="fish_name">Fish Name:</label><br>
+                <input type="text" id="fish_name" name="fish_name"><br><br>
+                <label for="price">Price:</label><br>
+                <input type="text" id="price" name="price"><br><br>
+                <button id="CheckFields" type="submit">Add</button>
+            </form> 
+             
+        </div>
+        
+        <script src="../middleware/product_add.js" defer></script> <!-- Include login script -->
+    
 </body>
 </html>

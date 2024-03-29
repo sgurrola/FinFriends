@@ -27,16 +27,7 @@ function handleSignup(req,res){
         }
     });
 
-/*
-    insertUser(username,password,firstname,lastname,addressline, addressline2, city,state,zip, (err,userId) => {
-        if (err){
-            console.error('Error inserting: user', err);
-        }
-        else{
-            console.log('User inserted with ID:', userId);
-            res.render('home');
-        }
-    });*/
+
 
 
 }
