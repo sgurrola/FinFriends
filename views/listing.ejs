@@ -29,39 +29,32 @@
 </head>
 <body>
     <h1>Fish Inventory</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Availability</th>
-                <th>Image</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% fishInventory.forEach(fish => { %>
-                <tr>
-                    <td><%= fish.fish_id %></td>
-                    <td> <% if (isLoggedIn) { %>
-                        <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&User=<%=encodeURIComponent(username)%>&LoggedStatus=<%= encodeURIComponent(true) %>"><%= fish.fish_name %></a>
-                        <% } else { %>
-                        <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&LoggedStatus=<%= encodeURIComponent(false) %>"><%= fish.fish_name %></a>
-                    <% } %></td>
+    <div class="product-grid">
+        <!-- Loop through fishInventory and generate product items -->
+        <% fishInventory.forEach(fish => { %>
+            <div class="product-item">
+                <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&LoggedStatus=<%= isLoggedIn %>&User=<%=encodeURIComponent(username)%>">
+                    <!-- Use the provided image div structure with dynamic JavaScript -->
+                    <div class="image" id="fish-image">
+                        <!-- Constructing dynamic file path for the image src using JavaScript function -->
+                        <img class="fishImage" src="/images/fishInventory/<%= formatFishName(fish.name) %>.jpeg" alt="<%= fish.name %>">
+                    </div>
+                    <h2><%= fish.fish_name %></h2>
+                    <p>$<%= formatPrice(fish.price) %></p>
+                    <p><%= fish.in_stock %> in stock</p>
+                </a>
+                <%
+                function formatFishName(name) {
+                    return fish.fish_name.toLowerCase().replace(/\s+/g, '');
+                } %>
 
-                    <td>$<%= formatPrice(fish.price) %></td>
-                    <td><%= fish.in_stock %></td>
-                    <td>      
-                        <% 
-                        function formatPrice(price) {
-                            return parseFloat(price).toFixed(2); // Converts to float and formats to 2 decimal places
-                        }
-                        %>
-                    </td>
-                </tr>
-            <% }); %>
-        </tbody>
-    </table>
-
+            </div>
+        <% }); %>
+        <% 
+        function formatPrice(price) {
+            return parseFloat(price).toFixed(2); // Converts to float and formats to 2 decimal places
+        }
+        %>
+    </div>
 </body>
 </html>
