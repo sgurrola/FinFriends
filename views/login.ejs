@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>login</title>
+    <title>Login</title>
     <link rel="stylesheet" type="text/css" href="../styles/login.css" />
-
     <meta charset="UTF-8" />
-
+</head>
+<body>
     <div class="top-page">
         <h1>FinFriends</h1>
         <nav class="navbar">
@@ -17,10 +17,13 @@
             </ol>
         </nav>
     </div>
-</head>
-<body>
+
     <div class="login-container">
         <p>Login</p>
+        <!-- Display error message if exists -->
+        <% if (typeof error !== 'undefined' && error !== null) { %>
+            <p class="error-message"><%= error %></p>
+        <% } %>
         <form action="/login" method="post">
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username"><br><br>
@@ -31,9 +34,6 @@
     </div>
     <div class="new-container">
         <p>New User? <a href="/signup">Create account</a></p>
-        <!-- Add registration form or link to registration page -->
-        
     </div>
-
 </body>
 </html>
