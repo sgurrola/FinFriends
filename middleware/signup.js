@@ -12,11 +12,13 @@ function handleSignup(req,res){
             console.error('error checking user', err);
         }
         if(exists) {
-            res.status(400).json({ error: 'Username is already taken' }); // Send JSON response indicating that the username is taken
+            //res.status(400).json({ error: 'Username is already taken' });
+            res.render('signup',{message:'username is already taken'}); // Send JSON response indicating that the username is taken
         } else{
             insertUser(username,password,firstname,lastname,addressline, addressline2, city,state,zip, (err,userId) => {
                 if (err){
                     console.error('Error inserting: user', err);
+                    res.render('signup',{message:'account could not be created'});
                 }
                 else{
                     console.log('User inserted with ID:', userId);

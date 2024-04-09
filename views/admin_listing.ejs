@@ -28,7 +28,7 @@
     
 </head>
 <body>
-    <h1>Fish Inventory</h1>
+    <h1>Admin Dashboard</h1>
     <table>
         <thead>
             <tr>
@@ -50,7 +50,7 @@
                     <% } %></td>
 
                     <td><%= fish.price %></td>
-                    <td><%= fish.in_stock %></td>
+                    <td><%= fish.quantity %></td>
                     <td>
                         <form action="/remove-fish" method="post">
                             <input type="hidden" name="fish_name" value="<%= fish.fish_name %>">
@@ -69,8 +69,13 @@
             <form id="stock-form" action="/product_add" method="post" >
                 <label for="fish_name">Fish Name:</label><br>
                 <input type="text" id="fish_name" name="fish_name"><br><br>
+
                 <label for="price">Price:</label><br>
                 <input type="text" id="price" name="price"><br><br>
+
+                <label for="image">Image Address:</label><br>
+                <input type="text" id="image" name="image"><br><br>
+
                 <button id="CheckFields" type="submit">Add</button>
             </form> 
              

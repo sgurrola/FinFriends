@@ -37,16 +37,12 @@
                     <!-- Use the provided image div structure with dynamic JavaScript -->
                     <div class="image" id="fish-image">
                         <!-- Constructing dynamic file path for the image src using JavaScript function -->
-                        <img class="fishImage" src="/images/fishInventory/<%= formatFishName(fish.name) %>.jpeg" alt="<%= fish.name %>">
+                        <img class="fishImage" src="<%= fish.image %>" alt="<%= fish.name %>">
                     </div>
                     <h2><%= fish.fish_name %></h2>
                     <p>$<%= formatPrice(fish.price) %></p>
-                    <p><%= fish.in_stock %> in stock</p>
+                    <p><%= fish.quantity %> in stock</p>
                 </a>
-                <%
-                function formatFishName(name) {
-                    return fish.fish_name.toLowerCase().replace(/\s+/g, '');
-                } %>
 
             </div>
         <% }); %>

@@ -41,7 +41,8 @@
             
             <div class="image" id="fish-image">
                 <!-- Constructing dynamic file path for the image src using JavaScript function -->
-                <img id="fishImage" alt="Fish image">
+                 <img id="fishImage" src="<%= fish.image %>" alt="<%= fish.name %>">
+
                 <!-- <p>Look at this adorable little guy.</p> -->
             </div>
             <div class="fishDetails">
@@ -67,20 +68,6 @@
     </div>
     </div>
         
-
-    
-    
-    <script>
-        // Function to convert fish name to lowercase and remove spaces
-        function formatFishName(name) {
-            return name.toLowerCase().replace(/\s+/g, '');
-        }
-    
-        // Retrieve fish name and construct dynamic image src
-        var fishName = '<%= fish.fish_name %>';
-        var formattedFishName = formatFishName(fishName);
-        document.getElementById('fishImage').src = '/images/fishInventory/' + formattedFishName + '.jpeg';
-    </script>
 
 </body>
 </html>

@@ -21,7 +21,7 @@ router.get('/',  (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login',{message:null});
 });
 
 router.post('/login', handleLogin);
@@ -38,7 +38,7 @@ router.get('/home',(req,res) =>{
 });
 
 router.get('/signup', (req, res) =>{
-    res.render('signup');
+    res.render('signup',{message:null});
 })
 
 router.post('/signup',handleSignup);
