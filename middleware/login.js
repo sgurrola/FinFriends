@@ -6,7 +6,9 @@ var connection = require('./database').databaseConnection;
 
 function handleLogin(req, res) {
     const { username, password } = req.body; // Assuming username and password are sent in the request body
-    
+    if (!username || !password ){
+        return res.render('login', { error: 'All fields are required' });
+    }
     // Check if the user exists
     userExists(username, (err, exists) => {
         console.log('Mark 1');
@@ -17,6 +19,10 @@ function handleLogin(req, res) {
             return res.status(500).send('Error checking user existence');
         }
         
+        if (!exists) {
+            // User does not exist, render login page again with error message
+            return res.render('login', { error: 'User does not exist. Sign up now!' });
+        }
 
         if (exists) {
             console.log('Mark3');
@@ -26,7 +32,11 @@ function handleLogin(req, res) {
                 console.error('Error checking password:', err);
                 return;
             }
-            if (match) {
+            else if (!match) {
+                // Password does not match, render login page again with error message
+                return res.render('login', { error: 'Incorrect password.' });
+            }
+            else  if (match) {
                 //check if is admin
                 isAdmin(username,(err,exists) =>{ 
                     if(err){console.error('Error checking admin status: ', err); return;}
@@ -37,7 +47,8 @@ function handleLogin(req, res) {
                                 console.error('Error executing query: ', err);
                                 return;
                             }
-                            res.render('admin_listing', { isLoggedIn: true, fishInventory: rows ,username:username });
+                            //res.render('admin_listing', { isLoggedIn: true, fishInventory: rows ,username:username });
+                            res.render('home',{isLoggedIn:true, username:username, admin:true});
                             console.log('password matches and this is an admin');
                     
                     
@@ -46,22 +57,20 @@ function handleLogin(req, res) {
                       //  res.render('admin_listing',{ isLoggedIn: true, username: username }); 
                        // console.log('pass word matches and this is an admin');}
                 
-                    else{res.render('home',{ isLoggedIn: true, username: username }); console.log('password matches and this is an regular user');}
+                    else{res.render('home',{ isLoggedIn: true, username: username ,admin:false}); console.log('password matches and this is an regular user');}
 
         
                 });
                // res.render('home');
                 //console.log('Password matches.');
             } else {
-               // res.json({ message: 'password does not match for', username: username });
-                res.render('login',{message:'password does not match'});
+                res.json({ message: 'password does not match for', username: username });
                 console.log('Password does not match.');
             }
         });
         } else {
             console.log('mark4'); 
-            //res.json({ message: 'does not exists', username: username });
-            res.render('login',{message:'account does not exists please sign up'});
+            res.json({ message: 'does not exists', username: username });
 
         }
         console.log('end of checks ');
@@ -72,5 +81,3 @@ function handleLogin(req, res) {
 
 
 module.exports = { handleLogin};
-
-

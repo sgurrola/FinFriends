@@ -9,8 +9,8 @@
     <header class="top-page">
         <h1>FinFriends</h1>
         <nav class="navbar">
-            <ol>                
-                <li>
+            <% if (!admin) { %>
+                <ol>                
                     <li>
                         <% if (isLoggedIn) { %>
                             <a href="/">Log out</a>
@@ -18,28 +18,47 @@
                             <a href="/login">Login/Sign-up</a>
                         <% } %>
                     </li>
-                    
-                </li>
-                <li>
-                    <% if (isLoggedIn) { %>
-                        <a href="/listing?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Listing</a>
-                    <% } else { %>
-                        <a href="/listing?LoggedStatus=<%= encodeURIComponent(false) %>">Listing</a>
-                    <% } %>
-                </li>
-                <li><a>Profile</a></li>
-                <li><% if (isLoggedIn) { %>
-                    <a href="/cart?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Cart</a>
-                <% } else { %>
-                    <a>Cart</a>
-                <% } %></li>
-            </ol>
+                    <li>
+                        <% if (isLoggedIn) { %>
+                            <a href="/listing?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Listing</a>
+                        <% } else { %>
+                            <a href="/listing?LoggedStatus=<%= encodeURIComponent(false) %>">Listing</a>
+                        <% } %>
+                    </li>
+                    <li><a >Profile</a></li> <!-- Add appropriate link or action -->
+                    <li>
+                        <% if (isLoggedIn) { %>
+                            <a href="/cart?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Cart</a>
+                        <% } else { %>
+                            <a >Cart</a>
+                        <% } %>
+                    </li>
+                </ol>
+            <% } else { %>
+                <ol>     
+                    <li><a href="/home">Log Out</a></li>           
+                    <li><a href="/admin_listing?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Inventory Dashboard</a></li>
+                    <li><a>Customer Dashboard</a></li>
+                    <li><a href="/listing?admin=<%= encodeURIComponent(true) %>&LoggedStatus=<%= encodeURIComponent(false)%>&User=<%=encodeURIComponent(username)%>">Listing View</a></li>
+                </ol>
+            <% } %>
+            
+         
         </nav>
     </header>
 
     <div class="home-img">
+
+
+
         <% if (isLoggedIn) { %>
+
+        <% if (admin) { %>
+            <h2>Welcome Back Admin:  <%= username %>!</h2>
+        <% } else { %>
             <h2>Welcome back, <%= username %>!</h2>
+        <% } %>  
+
         <% } else { %>
             <h2>Your one-stop shop for all your fin friend things!</h2>
         <% } %>        

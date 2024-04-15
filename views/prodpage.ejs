@@ -12,6 +12,9 @@
         <h1>FinFriends</h1>
         <nav class="navbar">
             <ol>
+
+                <% if (!admin) { %>
+                   
                 <li><% if (isLoggedIn) { %>
                     <a href="/home?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Home</a>
                 <% } else { %>
@@ -28,6 +31,17 @@
                 <% } else { %>
                     <a>Cart</a>
                 <% } %></li>
+                <% } else { %>
+                    <li><a>Admin Home</a></li>
+                    <li><a href="/admin_listing?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Inventory Dashboard</a></li>
+                    <li><a>Customer Dashboard</a></li>
+                    <li><a href="/listing?admin=<%= encodeURIComponent(true) %>&LoggedStatus=<%= encodeURIComponent(false)%>&User=<%=encodeURIComponent(username)%>">Listing View</a></li>
+             
+                <% } %>
+
+
+
+
             </ol>
         </nav>
     </div>

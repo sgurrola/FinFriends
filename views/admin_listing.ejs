@@ -10,18 +10,10 @@
         <h1>FinFriends</h1>
         <nav class="navbar">
             <ol>
-                <li><% if (isLoggedIn) { %>
-                    <a href="/home?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Home</a>
-                <% } else { %>
-                    <a href="/home">Home</a>
-                <% } %></li>
-                <li>Listing</li>
-                <li><a>Profile</a></li>
-                <li><% if (isLoggedIn) { %>
-                    <a href="/cart?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Cart</a>
-                <% } else { %>
-                    <a>Cart</a>
-                <% } %></li>
+                <li> <a href="/home?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>&admin=<%= encodeURIComponent(true)%>">Admin Home</a></li> 
+                <li><a>Inventory Dashboard</a></li>
+                <li><a>Customer Dashboard</a></li>
+                <li><a href="/listing?admin=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Listing View </a></li>
             </ol>
         </nav>
     </div>
@@ -78,6 +70,9 @@
 
                 <label for="describe">Product Description:</label><br>
                 <input type="text" id="describe" name="describe"><br><br>
+
+                <label for="quantity">Quantity:</label><br>
+                <input type="text" id="quantity" name="quantity"><br><br>
 
                 <button id="CheckFields" type="submit">Add</button>
             </form> 

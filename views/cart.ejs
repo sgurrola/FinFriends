@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +59,7 @@
                     <td><%= item.prod_name %></td>
                     <!--<td><%= item.inventory_type %></td>-->
                     <td>$<%= formatPrice(item.price) %></td>
-                    <td><%= item.quantity %></td>
+                    <td><%= item.quantity %>&nbsp;&nbsp;<button>Remove</button></td>
                 </tr>
             <% }); %>
             <tr>
