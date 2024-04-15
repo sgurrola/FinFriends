@@ -24,15 +24,6 @@ CREATE TABLE FISH_INVENTORY (
     quantity		INTEGER
 );
 
-
-
-CREATE TABLE ALT_INVENTORY (
-    alt_id         INTEGER NOT NULL PRIMARY KEY,
-    alt_name       VARCHAR(30),
-    price           INTEGER,
-    in_stock        BOOLEAN
-);
-
 CREATE TABLE USER_CART (
 	cart_item_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     username        VARCHAR(30) NOT NULL,
@@ -60,15 +51,11 @@ CREATE TABLE ITEMS_IN_ORDER(
 );
 
 
+
+
 INSERT INTO fish_inventory (fish_id, fish_name,price,in_stock,image,descriptions)
 VALUES (1,'Mandarinfish', 50,TRUE,'https://cdn.the-scientist.com/assets/articleNo/69345/aImg/44026/mandarinfish-800-l.jpg',
 'Small, broad-headed and elongated,  scaleless fish that typically reaches about 3 inches (8 cm) in length.  A brilliantly-colored fish, especially the male, with striking patterns of primarily  green and orange.');
-INSERT INTO fish_inventory (fish_id, fish_name,price,in_stock)
-VALUES (2,'Blue Tang', 100,TRUE);
-INSERT INTO fish_inventory (fish_id, fish_name,price,in_stock)
-VALUES (3,'Australian Flathead Perch', 5000,TRUE),
-(4,'Neptune Grouper', 6000,TRUE),
-(5,'Golden Basslet', 8000,TRUE);
 
 
 INSERT INTO USERS (username, keypass, first_name, last_name, street, apt_num, city, state, zip, admin_perms)
