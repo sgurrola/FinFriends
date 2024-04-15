@@ -65,7 +65,7 @@
                 <h3>Price:</h3>
                 <p>$<%= fish.price %></p>
                 <h3>In Stock:</h3>
-                <p><%= fish.in_stock %></p>
+                <p><%= fish.quantity %></p>
                 <% if (isLoggedIn) { %> 
                     <form action="/add-to-cart" method="post">
                         <input type="hidden" name="username" value="<%= username.trim() %>">
