@@ -16,6 +16,10 @@ function handleLogin(req, res) {
             return res.status(500).send('Error checking user existence');
         }
         
+        if (!exists) {
+            // User does not exist, render login page again with error message
+            return res.render('login', { error: 'User does not exist. Sign up now!' });
+        }
 
         if (exists) {
             console.log('Mark3');
@@ -25,10 +29,14 @@ function handleLogin(req, res) {
                 console.error('Error checking password:', err);
                 return;
             }
-            if (match) {
+            else if (!match) {
+                // Password does not match, render login page again with error message
+                return res.render('login', { error: 'Incorrect password.' });
+            }
+            else if (match) {
                 //check if is admin
                 isAdmin(username,(err,exists) =>{ 
-                    if(err){console.error('Error checking admin status: ', err); return;}
+                    if(err){console.error('Error checking admin status: ', err);return res.status(500).send('Error checking admin status');}
                     if (exists) {res.render('home',{ isLoggedIn: true, username: username }); console.log('pass word matches and this is an admin');}
                     else{res.render('home',{ isLoggedIn: true, username: username }); console.log('password matches and this is an regular user');}
 
@@ -54,5 +62,3 @@ function handleLogin(req, res) {
 
 
 module.exports = { handleLogin};
-
-

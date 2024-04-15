@@ -67,6 +67,8 @@ router.post('/go-to-checkout',(req,res) =>{
 router.post('/confirm-order',(req,res)=>{
     const username = req.body.username;
     const sub = req.body.subtotal;
+    const status = req.query.LoggedStatus;
+    const isLoggedIn = status === 'true';
 
     createOrder(username,sub,(err,result) =>{
         if(err){
@@ -74,7 +76,7 @@ router.post('/confirm-order',(req,res)=>{
         }
         if(result){
             console.log('Order Created');
-            res.json({ message: 'ORDER IS ON THE WAY!!!', username: username });
+            res.render('confirmationPage', {isLoggedIn:isLoggedIn, message: 'ORDER IS ON THE WAY!!!', username: username });
 
         }
     });

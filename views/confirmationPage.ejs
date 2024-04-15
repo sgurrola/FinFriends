@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Complete</title>
+    <link rel="stylesheet" type="text/css" href="../styles/confirmation.css" />
+</head>
+<body>
+    <div class="top-page">
+        <h1>FinFriends</h1>
+        <nav class="navbar">
+            <ol>
+                <li><% if (isLoggedIn) { %>
+                    <a href="/home?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Home</a>
+                <% } else { %>
+                    <a href="/home">Home</a>
+                <% } %></li>
+                <li><% if (isLoggedIn) { %>
+                    <a href="/listing?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Listing</a>
+                <% } else { %>
+                    <a href="/listing">Listing</a>
+                <% } %></li>
+                <li><a>Profile</a></li>
+                <li><a>Cart</a></li>
+            </ol>
+        </nav>
+    </div>
+    <h2>Your Order is Complete!</h2>
+    <div class="center">
+            <img src="images/v5.gif" alt="Your GIF">
+        <!-- Add any additional content you want to display here -->
+    </div>
+</body>
+</html>
