@@ -27,56 +27,62 @@
     </div>
     
 </head>
-<body>
-    <h1>Fish Inventory</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Availability</th>
-                <th>Remove?</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% fishInventory.forEach(fish => { %>
+<% if (isAdmin) { %>
+    <body>
+        <h1>Fish Inventory</h1>
+     <table>
+            <thead>
                 <tr>
-                    <td><%= fish.fish_id %></td>
-                    <td> <% if (isLoggedIn) { %>
-                        <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&User=<%=encodeURIComponent(username)%>&LoggedStatus=<%= encodeURIComponent(true) %>"><%= fish.fish_name %></a>
-                        <% } else { %>
-                        <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&LoggedStatus=<%= encodeURIComponent(false) %>"><%= fish.fish_name %></a>
-                    <% } %></td>
-
-                    <td><%= fish.price %></td>
-                    <td><%= fish.in_stock %></td>
-                    <td>
-                        <form action="/remove-fish" method="post">
-                            <input type="hidden" name="fish_name" value="<%= fish.fish_name %>">
-                            <input type="hidden" name="price" value=<%= fish.price %>>
-                            <button type="submit" id="removeFishButton"> remove <%= fish.fish_name %></button>
-                        </form>      
-                        
-                    </td>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Availability</th>
+                    <th>Remove?</th>
                 </tr>
-            <% }); %>
-        </tbody>
-    </table> 
+            </thead>
+            <tbody>
+                <% fishInventory.forEach(fish => { %>
+                    <tr>
+                        <td><%= fish.fish_id %></td>
+                        <td> <% if (isLoggedIn) { %>
+                            <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&User=<%=encodeURIComponent(username)%>&LoggedStatus=<%= encodeURIComponent(true) %>"><%= fish.fish_name %></a>
+                            <% } else { %>
+                            <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&LoggedStatus=<%= encodeURIComponent(false) %>"><%= fish.fish_name %></a>
+                        <% } %></td>
+
+                        <td><%= fish.price %></td>
+                        <td><%= fish.in_stock %></td>
+                        <td>
+                            <form action="/remove-fish" method="post">
+                                <input type="hidden" name="fish_name" value="<%= fish.fish_name %>">
+                                <input type="hidden" name="price" value=<%= fish.price %>>
+                                <button type="submit" id="removeFishButton"> remove <%= fish.fish_name %></button>
+                            </form>      
+                        
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+       </table> 
     
-        <div class="stock-container">
-            <p>Add Fish</p>
-            <form id="stock-form" action="/product_add" method="post" >
-                <label for="fish_name">Fish Name:</label><br>
-                <input type="text" id="fish_name" name="fish_name"><br><br>
-                <label for="price">Price:</label><br>
-                <input type="text" id="price" name="price"><br><br>
-                <button id="CheckFields" type="submit">Add</button>
-            </form> 
+          <div class="stock-container">
+              <p>Add Fish</p>
+              <form id="stock-form" action="/product_add" method="post" >
+                    <label for="fish_name">Fish Name:</label><br>
+                    <input type="text" id="fish_name" name="fish_name"><br><br>
+                    <label for="price">Price:</label><br>
+                    <input type="text" id="price" name="price"><br><br>
+                    <button id="CheckFields" type="submit">Add</button>
+                </form> 
              
-        </div>
+            </div>
         
-        <script src="../middleware/product_add.js" defer></script> <!-- Include login script -->
+            <script src="../middleware/product_add.js" defer></script> <!-- Include login script -->
     
-</body>
+    </body>
+<% } else { %>
+    <body>
+        <h1>You look a little lost there</h1>
+    </body>
+<% } %>  
 </html>
