@@ -15,13 +15,13 @@ const {handleStocking} = require('../middleware/product_add');
 
 //Get home page
 router.get('/',  (req, res) => {
-    res.render('home',{isLoggedIn:false}); //render willl look into a views folder
-    console.log({isLoggedIn: false});
+    res.render('home',{isLoggedIn:false, admin:false}); //render willl look into a views folder
+    console.log({isLoggedIn: false,admin:false});
 
 });
 
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login',{message:null});
 });
 
 router.post('/login', handleLogin);
@@ -30,15 +30,15 @@ router.get('/home',(req,res) =>{
     const status = req.query.LoggedStatus;
     const isLoggedIn = status === 'true';
     const user = req.query.User;
-
-    res.render('home',{isLoggedIn:isLoggedIn, username:user});
+    const admin = req.query.admin;
+    res.render('home',{isLoggedIn:isLoggedIn, username:user,admin:admin});
     console.log({isLoggedIn: isLoggedIn,username: user});
 
 
 });
 
 router.get('/signup', (req, res) =>{
-    res.render('signup');
+    res.render('signup',{message:null});
 })
 
 router.post('/signup',handleSignup);
@@ -74,7 +74,8 @@ router.post('/confirm-order',(req,res)=>{
         }
         if(result){
             console.log('Order Created');
-            res.json({ message: 'ORDER IS ON THE WAY!!!', username: username });
+            res.render('confirmationPage',{username:username,isLoggedIn: true});
+            //res.json({ message: 'ORDER IS ON THE WAY!!!', username: username });
 
         }
     });
@@ -87,12 +88,14 @@ router.get('/listing',(req,res) => {
     const status = req.query.LoggedStatus;
     const isLoggedIn = status === 'true';
     const user = req.query.User;
+    const admin1 = req.query.admin;
+    const admin = admin1 === 'true';
     connection.query(sql,(err,rows) => {
         if(err){
             console.error('Error executing query: ', err);
             return;
         }
-        res.render('listing', { isLoggedIn: isLoggedIn, fishInventory: rows ,username:user });
+        res.render('listing', { isLoggedIn: isLoggedIn, fishInventory: rows ,username:user , admin: admin});
         console.log({isLoggedIn: isLoggedIn, username:user});
 
 
@@ -102,7 +105,9 @@ router.get('/listing',(req,res) => {
 router.get('/cart',(req,res)=>{
     const status = req.query.LoggedStatus;
     const isLoggedIn = status === 'true';
-    const user = req.query.User;
+   // const user = req.query.User;
+   const user = req.query.User.trim(); // Trim the username value
+
     const sql = 'SELECT * from user_cart where username = ?';
     connection.query(sql,[user],(err,rows) => {
         if(err){
@@ -110,6 +115,7 @@ router.get('/cart',(req,res)=>{
             return;
         }
         res.render('cart', { isLoggedIn: isLoggedIn, userCart: rows ,username:user });
+        console.log('going to cart now');
         console.log({isLoggedIn: isLoggedIn, username:user});
     });
 
@@ -122,7 +128,8 @@ router.get('/prodpage',(req,res) => {
     const status = req.query.LoggedStatus;
     const isLoggedIn = status === 'true';
     const user = req.query.User;
-
+    const admin1 = req.query.admin;
+    const admin = admin1 === 'true';
     connection.query(sql,[fishName],(err,result) =>{
         if(err){
             console.error('Error finding fish', err);
@@ -133,7 +140,7 @@ router.get('/prodpage',(req,res) => {
             res.status(404).send('Fish not found');
             return;
         }
-        res.render('prodpage',{fish:result[0],isLoggedIn:isLoggedIn,username:user} );
+        res.render('prodpage',{fish:result[0],isLoggedIn:isLoggedIn,username:user,admin:admin} );
         console.log({isLoggedIn: isLoggedIn,username:user});
 
     });
@@ -150,7 +157,6 @@ router.get('/admin_listing',(req,res) => {
     const sql = 'SELECT * from fish_inventory';
     const status = req.query.LoggedStatus;
     const isLoggedIn = status === 'true';
-    const isAdmin = status === 'true';
     const user = req.query.User;
     connection.query(sql,(err,rows) => {
         if(err){

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +59,7 @@
                     <td><%= item.prod_name %></td>
                     <!--<td><%= item.inventory_type %></td>-->
                     <td>$<%= formatPrice(item.price) %></td>
-                    <td><%= item.quantity %></td>
+                    <td><%= item.quantity %>&nbsp;&nbsp;<button>Remove</button></td>
                 </tr>
             <% }); %>
             <tr>
@@ -68,13 +69,25 @@
            
         </tbody>
     </table>
+
+        <%
+        // Assuming calculateSubtotal(userCart) returns the subtotal
+        var subtotal = calculateSubtotal(userCart);
+
+        if (subtotal !== 0) {
+        %>
     <form action="/go-to-checkout" method="post">
-        <input type="hidden" name="username" value="<%= username %>">
-        <input type="hidden" name="subtotal" value=<%= calculateSubtotal(userCart) %>>
-        <div class="checkout-button-container">
-            <button type="submit" id="checkoutButton">Check Out</button>
-        </div>
-    </form>  
+    <input type="hidden" name="username" value="<%= username %>">
+    <input type="hidden" name="subtotal" value=<%= subtotal %>>
+    <div class="checkout-button-container">
+        <button type="submit" id="checkoutButton">Check Out</button>
+    </div>
+    </form> 
+    <%
+    }
+       %>
+
+
     <% function calculateSubtotal(cart) {
         let subtotal = 0;
         cart.forEach(item => {

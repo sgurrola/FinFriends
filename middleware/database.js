@@ -139,12 +139,13 @@ function fishExists(fish_name, callback) {
   });
 }
 
-function insertFish(fish_name,price,in_stock, callback){
-  let sql = 'INSERT INTO fish_inventory (fish_name,price,in_stock) VALUES (?,?,TRUE)';
-  connection.query(sql,[fish_name,price,in_stock], (err,result) =>{
+function insertFish(fish_name,price,image,description,quantity,callback){
+  let sql = 'INSERT INTO fish_inventory (fish_name,price,in_stock,image,description,quantity) VALUES (?,?,TRUE,?,?,?)';
+  connection.query(sql,[fish_name,price,image,description,quantity], (err,result) =>{
     if (err){
       return callback(err);
     }
+    console.log('this is the image',image);
     callback(null,result.insertId);
   });
 }

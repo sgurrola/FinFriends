@@ -21,6 +21,9 @@
 <body>
     <div class="signup-container">
         <p>Sign Up</p>
+        <% if (typeof error !== 'undefined' && error !== null) { %>
+            <p class="error-message"><%= error %></p>
+        <% } %>
         <form id="signup-form" action="/signup" method="post" >
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username"><br><br>
@@ -46,6 +49,5 @@
          
     </div>
     
-    <script src="../middleware/signup.js" defer></script> <!-- Include login script -->
 </body>
 </html>

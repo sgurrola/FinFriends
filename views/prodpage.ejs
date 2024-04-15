@@ -12,6 +12,9 @@
         <h1>FinFriends</h1>
         <nav class="navbar">
             <ol>
+
+                <% if (!admin) { %>
+                   
                 <li><% if (isLoggedIn) { %>
                     <a href="/home?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Home</a>
                 <% } else { %>
@@ -28,6 +31,17 @@
                 <% } else { %>
                     <a>Cart</a>
                 <% } %></li>
+                <% } else { %>
+                    <li><a>Admin Home</a></li>
+                    <li><a href="/admin_listing?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Inventory Dashboard</a></li>
+                    <li><a>Customer Dashboard</a></li>
+                    <li><a href="/listing?admin=<%= encodeURIComponent(true) %>&LoggedStatus=<%= encodeURIComponent(false)%>&User=<%=encodeURIComponent(username)%>">Listing View</a></li>
+             
+                <% } %>
+
+
+
+
             </ol>
         </nav>
     </div>
@@ -41,7 +55,8 @@
             
             <div class="image" id="fish-image">
                 <!-- Constructing dynamic file path for the image src using JavaScript function -->
-                <img id="fishImage" alt="Fish image">
+                 <img id="fishImage" src="<%= fish.image %>" alt="<%= fish.name %>">
+
                 <!-- <p>Look at this adorable little guy.</p> -->
             </div>
             <div class="fishDetails">
@@ -50,10 +65,10 @@
                 <h3>Price:</h3>
                 <p>$<%= fish.price %></p>
                 <h3>In Stock:</h3>
-                <p><%= fish.in_stock %></p>
+                <p><%= fish.quantity %></p>
                 <% if (isLoggedIn) { %> 
                     <form action="/add-to-cart" method="post">
-                        <input type="hidden" name="username" value="<%= username %>">
+                        <input type="hidden" name="username" value="<%= username.trim() %>">
                         <input type="hidden" name="fish_name" value="<%= fish.fish_name %>">
                         <input type="hidden" name="price" value=<%= fish.price %>>
                         <button type="submit" id="addtoCartButton">Add to Cart</button>
@@ -67,20 +82,6 @@
     </div>
     </div>
         
-
-    
-    
-    <script>
-        // Function to convert fish name to lowercase and remove spaces
-        function formatFishName(name) {
-            return name.toLowerCase().replace(/\s+/g, '');
-        }
-    
-        // Retrieve fish name and construct dynamic image src
-        var fishName = '<%= fish.fish_name %>';
-        var formattedFishName = formatFishName(fishName);
-        document.getElementById('fishImage').src = '/images/fishInventory/' + formattedFishName + '.jpeg';
-    </script>
 
 </body>
 </html>

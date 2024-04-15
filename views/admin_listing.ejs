@@ -10,25 +10,17 @@
         <h1>FinFriends</h1>
         <nav class="navbar">
             <ol>
-                <li><% if (isLoggedIn) { %>
-                    <a href="/home?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Home</a>
-                <% } else { %>
-                    <a href="/home">Home</a>
-                <% } %></li>
-                <li>Listing</li>
-                <li><a>Profile</a></li>
-                <li><% if (isLoggedIn) { %>
-                    <a href="/cart?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Cart</a>
-                <% } else { %>
-                    <a>Cart</a>
-                <% } %></li>
+                <li> <a href="/home?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>&admin=<%= encodeURIComponent(true)%>">Admin Home</a></li> 
+                <li><a>Inventory Dashboard</a></li>
+                <li><a>Customer Dashboard</a></li>
+                <li><a href="/listing?admin=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Listing View </a></li>
             </ol>
         </nav>
     </div>
     
 </head>
 <body>
-    <h1>Fish Inventory</h1>
+    <h1>Admin Dashboard</h1>
     <table>
         <thead>
             <tr>
@@ -43,14 +35,9 @@
             <% fishInventory.forEach(fish => { %>
                 <tr>
                     <td><%= fish.fish_id %></td>
-                    <td> <% if (isLoggedIn) { %>
-                        <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&User=<%=encodeURIComponent(username)%>&LoggedStatus=<%= encodeURIComponent(true) %>"><%= fish.fish_name %></a>
-                        <% } else { %>
-                        <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&LoggedStatus=<%= encodeURIComponent(false) %>"><%= fish.fish_name %></a>
-                    <% } %></td>
-
+                    <td><%= fish.fish_name %></td>
                     <td><%= fish.price %></td>
-                    <td><%= fish.in_stock %></td>
+                    <td><%= fish.quantity %></td>
                     <td>
                         <form action="/remove-fish" method="post">
                             <input type="hidden" name="fish_name" value="<%= fish.fish_name %>">
@@ -69,8 +56,19 @@
             <form id="stock-form" action="/product_add" method="post" >
                 <label for="fish_name">Fish Name:</label><br>
                 <input type="text" id="fish_name" name="fish_name"><br><br>
+
                 <label for="price">Price:</label><br>
                 <input type="text" id="price" name="price"><br><br>
+
+                <label for="image">Image Address:</label><br>
+                <input type="text" id="image" name="image"><br><br>
+
+                <label for="describe">Product Description:</label><br>
+                <input type="text" id="describe" name="describe"><br><br>
+
+                <label for="quantity">Quantity:</label><br>
+                <input type="text" id="quantity" name="quantity"><br><br>
+
                 <button id="CheckFields" type="submit">Add</button>
             </form> 
              
