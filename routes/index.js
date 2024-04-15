@@ -104,7 +104,9 @@ router.get('/listing',(req,res) => {
 router.get('/cart',(req,res)=>{
     const status = req.query.LoggedStatus;
     const isLoggedIn = status === 'true';
-    const user = req.query.User;
+   // const user = req.query.User;
+   const user = req.query.User.trim(); // Trim the username value
+
     const sql = 'SELECT * from user_cart where username = ?';
     connection.query(sql,[user],(err,rows) => {
         if(err){
@@ -112,6 +114,7 @@ router.get('/cart',(req,res)=>{
             return;
         }
         res.render('cart', { isLoggedIn: isLoggedIn, userCart: rows ,username:user });
+        console.log('going to cart now');
         console.log({isLoggedIn: isLoggedIn, username:user});
     });
 

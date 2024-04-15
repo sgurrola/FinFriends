@@ -22,7 +22,7 @@ function handleSignup(req,res){
                 }
                 else{
                     console.log('User inserted with ID:', userId);
-                    res.render('home',{isLoggedIn:true,username:username});
+                    res.render('home',{isLoggedIn:true,username:username, admin:false});
                 }
             });
         
