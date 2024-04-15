@@ -1,4 +1,16 @@
-.login-container {
+
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.checkout-button-container {
+    text-align: center;
+}
+
+.payment-container{
     text-align: center; /* Horizontal centering */
     justify-content: center; /* Horizontal centering */
     background-color: #bde3ff;
@@ -7,10 +19,9 @@
     border-radius: 10px;
     width: 300px;
     margin: 0 auto;
-
 }
 
-.new-container {
+.shipping-container{
     text-align: center; /* Horizontal centering */
     justify-content: center; /* Horizontal centering */
     background-color: #ffcd29;
@@ -19,19 +30,17 @@
     border-radius: 10px;
     width: 300px;
     margin: 0 auto;
-
 }
-
-
+/* Top page container */
 .top-page{
     color:black;
     background-color: antiquewhite;
     display: flex;
     justify-content: space-between;
     align-items:center;
-
 }
 
+/* Navbar styles */
 .navbar {
     display: flex;
 }
@@ -45,6 +54,13 @@
 .navbar li{
     display: inline-block;
     margin-right:10px;
+}
+
+/* Page title */
+h1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 /* Table styles */
@@ -69,4 +85,8 @@ table th {
 /* Alternate row background color */
 tbody tr:nth-child(even) {
     background-color: #f9f9f9;
+}
+
+p {
+    text-align: center;
 }

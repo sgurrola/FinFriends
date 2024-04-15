@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart Page</title>
-    <link rel="stylesheet" type="text/css" href="../styles/cart.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/checkout.css" />
 
     <div class="top-page">
         <h1>FinFriends</h1>
@@ -22,6 +22,27 @@
 </head>
 <body>
     <h1>Checkout Order for <%= username %></h1>
+    <div class="payment-container">
+        <p>Card Information</p><br>
+        <form action="/payment" method="post">
+            <label for="text">Card Number</label><br>
+            <input type="text" id="card" name="cardInfo"><br><br>
+            <label for="text">Expiration Month/Year</label><br>
+            <input type="text" id="Expiration" name="exp"><br><br>
+            <label for="text">CVV</label><br>
+            <input type="text" id="CVV" name="CVV"><br><br>
+        </form><br>
+    </div>
+    <div class = "shipping-container">
+        <p>Shipping Information</p>
+        <form action="/shipping" method="post">
+            <label for="text">Address</label><br>
+            <input type="text" id="address" name="addrInfo"><br><br>
+            <label for="text">Zipcode</label><br>
+            <input type="text" id="address" name="Zipcode"><br><br>
+        </form>        
+    </div>
+
     <p>Confirm order details below</p>
     <p>Subtotal: $<%= formatPrice(cartSubtotal) %></p>
     <p>Total: $<%= formatPrice(calculateTotal(cartSubtotal)) %></p>
@@ -29,8 +50,9 @@
     <form action="/confirm-order" method="post">
         <input type="hidden" name="username" value="<%= username %>">
         <input type="hidden" name="subtotal" value= <%= cartSubtotal %>>
-
+        <div class="checkout-button-container">
         <button type="submit" id="checkoutButton">Confirm</button>
+        </div>
     </form>  
     <% function calculateTotal(cartSubtotal) {
         return cartSubtotal*(1.0825);

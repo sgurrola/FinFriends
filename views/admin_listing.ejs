@@ -35,12 +35,7 @@
             <% fishInventory.forEach(fish => { %>
                 <tr>
                     <td><%= fish.fish_id %></td>
-                    <td> <% if (isLoggedIn) { %>
-                        <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&User=<%=encodeURIComponent(username)%>&LoggedStatus=<%= encodeURIComponent(true) %>"><%= fish.fish_name %></a>
-                        <% } else { %>
-                        <a href="/prodpage?fishName=<%= encodeURIComponent(fish.fish_name) %>&LoggedStatus=<%= encodeURIComponent(false) %>"><%= fish.fish_name %></a>
-                    <% } %></td>
-
+                    <td><%= fish.fish_name %></td>
                     <td><%= fish.price %></td>
                     <td><%= fish.quantity %></td>
                     <td>

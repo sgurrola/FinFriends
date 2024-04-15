@@ -74,7 +74,8 @@ router.post('/confirm-order',(req,res)=>{
         }
         if(result){
             console.log('Order Created');
-            res.json({ message: 'ORDER IS ON THE WAY!!!', username: username });
+            res.render('confirmationPage',{username:username,isLoggedIn: true});
+            //res.json({ message: 'ORDER IS ON THE WAY!!!', username: username });
 
         }
     });
