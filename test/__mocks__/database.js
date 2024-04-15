@@ -3,7 +3,7 @@ function userExists(username, callback) {
   if (username === 'dnieto' || username === 'test') {
     callback(null, true); // User exists
   } else {
-    callback(null, false); // User does not exist
+    callback(err); // User does not exist
   }
 }
 

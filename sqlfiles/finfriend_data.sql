@@ -8,7 +8,7 @@ CCREATE TABLE USERS (
     street          VARCHAR(30) NOT NULL,
     apt_num         VARCHAR(5),
     city            VARCHAR(20) NOT NULL,
-    state			varchar(20) NOT NuLL,
+    state			varchar(20) NOT NULL,
     zip             INTEGER NOT NULL,
 	cart_id         INTEGER ,
     admin_perms     BOOLEAN NOT NULL
@@ -60,5 +60,6 @@ VALUES (1,'Mandarinfish', 50,TRUE,'https://cdn.the-scientist.com/assets/articleN
 
 INSERT INTO USERS (username, keypass, first_name, last_name, street, apt_num, city, state, zip, admin_perms)
 VALUES ('dnieto', 'pass123', 'Daisy', 'Nieto', '123 Main', NULL, 'San Antonio', 'Texas', 12345, TRUE);
+VALUES ('bhorn', 'pass123', 'Britton', 'Horn', '123 Main', NULL, 'San Antonio', 'Texas', 12345, FALSE);
 
 
