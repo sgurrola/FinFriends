@@ -6,10 +6,6 @@
 
 const {userExists,passwordCheck,isAdmin,addToCart,insertFish,removeFish,fishExists,insertUser } = require('../middleware/database');
 //const {userExists, passwordCheck} = require('./__mocks__/database');
-const {handleLogin} = require('../middleware/login');
-const {addToDatabase} = require('../middleware/prodpage');
-const {handleStocking} = require('../middleware/product_add');
-const {handleSignup} = require('../middleware/signup');
 
 
 test('checks if user dnieto exists', (done) => {
@@ -66,6 +62,14 @@ test('checks if user dnieto password is valid (no)', () => {
         done();
     });
 });
+
+test('checks if user Doge is inserted', () => {
+    insertUser('DogeMan','doge123', 'Doge','Man', '123 rd', '','San Antonio', 'TX', 78207, (err, result) => {
+        expect(result).toBe(true);
+        expect(err).toBeNull();
+        done();
+    } )
+})
 
 test('checks if dnieto is admin', () => {
     isAdmin('dnieto', (err, result) => {
