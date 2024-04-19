@@ -47,16 +47,13 @@
     
     <div class="article-items">
         <article>
-            <h2>Listing</h2>
-            <p>We have a variety of offerings: exotic fish, fish products, and more!</p>
-        </article>
-        <article>
             <h2>Fish</h2>
             <p>Here are our collection of exotic pet fish!</p>
-        </article>
-        <article>
-            <h2>Item</h2>
-            <p>Check out this specific item!</p>
+            <% if (isLoggedIn) { %>
+                <a href="/listing?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">View Listing</a>
+            <% } else { %>
+                <a href="/listing?LoggedStatus=<%= encodeURIComponent(false) %>">View Listing</a>
+            <% } %>
         </article>
     </div>
     
