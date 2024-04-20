@@ -7,7 +7,7 @@ const {handleSignup} = require('../middleware/signup');
 const {addToDatabase} = require('../middleware/prodpage');
 var connection = require('../middleware/database').databaseConnection;
 var fs = require("fs");
-const {createOrder,removeFish} = require('../middleware/database');
+const {createOrder,removeFish,addAudit} = require('../middleware/database');
 const {handleStocking} = require('../middleware/product_add');
 
 
@@ -146,10 +146,8 @@ router.get('/prodpage',(req,res) => {
     });
 
 });
-////
-router.get('/product_add', (req, res) =>{
-    res.render('product_add');
-})
+
+
 
 router.post('/product_add',handleStocking);
 
@@ -182,6 +180,7 @@ router.get('/admin_listing',(req,res) => {
 
 router.post('/remove-fish',(req,res) =>{
     const fishname = req.body.fish_name;
+    const user = req.body.admin;
 
     
     removeFish(fishname, (err,result) =>{
@@ -189,6 +188,20 @@ router.post('/remove-fish',(req,res) =>{
             console.log('Error removing');
         }
         if(result){
+
+
+            //
+            addAudit('delete',fishname,user,(err,fishId) =>{
+                if (err) {
+                    console.error('Error adding to audit log',err);
+                }
+                else{
+                    console.log(user,' deleted ',fishname);
+                }
+                });
+
+            //
+
             console.log('fish removed successfully:', fishname);
             res.redirect('back');
 

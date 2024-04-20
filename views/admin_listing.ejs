@@ -41,7 +41,7 @@
                     <td>
                         <form action="/remove-fish" method="post">
                             <input type="hidden" name="fish_name" value="<%= fish.fish_name %>">
-                            <input type="hidden" name="price" value=<%= fish.price %>>
+                            <input type="hidden" name="admin" value="<%= username %>">
                             <button type="submit" id="removeFishButton"> remove <%= fish.fish_name %></button>
                         </form>      
                         
@@ -54,6 +54,8 @@
         <div class="stock-container">
             <p>Add Fish</p>
             <form id="stock-form" action="/product_add" method="post" >
+
+
                 <label for="fish_name">Fish Name:</label><br>
                 <input type="text" id="fish_name" name="fish_name"><br><br>
 
@@ -68,6 +70,9 @@
 
                 <label for="quantity">Quantity:</label><br>
                 <input type="text" id="quantity" name="quantity"><br><br>
+                
+                <input type="hidden" name="admin" value="<%= username %>">
+
 
                 <button id="CheckFields" type="submit">Add</button>
             </form> 
