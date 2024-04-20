@@ -2,10 +2,11 @@
 
 //removed following from package.json script: "test": "echo \"Error: no test specified\" && exit 1"
 
-//var connection = require('../middleware/database').databaseConnection;
+var connection = require('../middleware/database').databaseConnection;
 
 const {userExists,passwordCheck,isAdmin,addToCart,insertFish,removeFish,fishExists,insertUser } = require('../middleware/database');
 //const {userExists, passwordCheck} = require('./__mocks__/database');
+
 
 
 test('checks if user dnieto exists', (done) => {
@@ -102,7 +103,7 @@ test('checks if notReal is admin', () => {
 });
 
 test('dnieto add to cart', () => {
-    addToCart('dnieto', (err, result) => {
+    addToCart('dnieto', 'Mandarinfish', 'fish', '5', (err, result) => {
         expect(err).toBeNull();
         // Check if the user exists
         expect(result).not.toBeNull();
@@ -112,7 +113,7 @@ test('dnieto add to cart', () => {
 });
 
 test('bhorn add to cart', () => {
-    addToCart('bhorn', (err, result) => {
+    addToCart('bhorn', 'Mandarinfish', 'fish', '5', (err, result) => {
         expect(err).toBeNull();
         // Check if the user exists
         expect(result).not.toBeNull();
