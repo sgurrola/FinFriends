@@ -162,12 +162,24 @@ function removeFish(fish_name, callback) {
 }
 
 
+function addAudit(action,fish_name,admin,callback ){
+  let sql = 'INSERT into audit (operation,product,admin_user) values (?,?,?)';
+  connection.query(sql,[action,fish_name,admin], (err,result) =>{
+    if(err){
+      return callback(err);
+    }
+    console.log('added to audit trail');
+    callback(null,result.insertId);
+  });
+
+
+}
 
 
 
 //////
 
 module.exports = {
-  userExists,passwordCheck,insertUser,isAdmin,addToCart,createOrder,fishExists, insertFish,removeFish,
+  userExists,passwordCheck,insertUser,isAdmin,addToCart,createOrder,fishExists, insertFish,removeFish,addAudit,
   databaseConnection: connection
 };

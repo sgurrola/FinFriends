@@ -10,7 +10,6 @@ CCREATE TABLE USERS (
     city            VARCHAR(20) NOT NULL,
     state			varchar(20) NOT NuLL,
     zip             INTEGER NOT NULL,
-	cart_id         INTEGER ,
     admin_perms     BOOLEAN NOT NULL
 );
 
@@ -50,15 +49,13 @@ CREATE TABLE ITEMS_IN_ORDER(
 	FOREIGN KEY (order_id) references orders(order_id)
 );
 
-
-
-
-INSERT INTO fish_inventory (fish_id, fish_name,price,in_stock,image,descriptions)
-VALUES (1,'Mandarinfish', 50,TRUE,'https://cdn.the-scientist.com/assets/articleNo/69345/aImg/44026/mandarinfish-800-l.jpg',
-'Small, broad-headed and elongated,  scaleless fish that typically reaches about 3 inches (8 cm) in length.  A brilliantly-colored fish, especially the male, with striking patterns of primarily  green and orange.');
-
-
-INSERT INTO USERS (username, keypass, first_name, last_name, street, apt_num, city, state, zip, admin_perms)
-VALUES ('dnieto', 'pass123', 'Daisy', 'Nieto', '123 Main', NULL, 'San Antonio', 'Texas', 12345, TRUE);
+CREATE TABLE AUDIT(
+	audit_id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    operation VARCHAR(30) NOT NUlL,
+    product TEXT NOT NULL,
+    admin_user VARCHAR(30) NOT NULL,
+    operation_time	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (admin_user) references users(username)
+);
 
 

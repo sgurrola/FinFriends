@@ -1,12 +1,16 @@
 const express = require('express');
-const { insertFish,fishExists } = require('./database');
+const { insertFish,fishExists,addAudit } = require('./database');
 
 
 
 
 function handleStocking(req,res){
     const {fish_name,price,image,describe,quantity} = req.body; // Assuming username and password are sent in the request body
-    const user = req.query.User;
+    const user = req.body.admin;
+
+    console.log('this is at the begging of handle stocking and this is the user value',user);
+   
+    //const admin = req.query.user;
 
     fishExists(fish_name, (err, exists) => { 
         if(err){
@@ -21,9 +25,20 @@ function handleStocking(req,res){
                 }
                 else{
                     console.log('Fish inserted with ID:', fishId);
+                    //audit log 
+                    //
+                    addAudit('add',fish_name,user,(err,fishId) =>{
+                    if (err) {
+                        console.error('Error adding to audit log',err);
+                    }
+                    else{
+                        console.log(user,'added a product');
+                    }
+
+
+                    });
                     res.redirect('back');
 
-                    //res.render('home',{isLoggedIn:true,admin:true,username:user});
                     console.log(image);
                 }
             });

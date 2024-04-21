@@ -24,7 +24,6 @@
                         <a href="/home">Home</a>
                     <% } %>
                     <li>Listing</li>
-                    <li><a>Profile</a></li>
                     <li><% if (isLoggedIn) { %>
                         <a href="/cart?LoggedStatus=<%= encodeURIComponent(true) %>&User=<%=encodeURIComponent(username)%>">Cart</a>
                     <% } else { %>
