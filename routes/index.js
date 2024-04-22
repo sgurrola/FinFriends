@@ -44,7 +44,7 @@ router.get('/signup', (req, res) =>{
 router.post('/signup',handleSignup);
 
 router.post('/add-to-cart',(req,res) =>{
-    const username = req.body.username;
+    const username = req.body.username.trim();
     const fishname = req.body.fish_name;
     const fishPrice = req.body.price;
 
@@ -54,7 +54,7 @@ router.post('/add-to-cart',(req,res) =>{
 });
 
 router.post('/go-to-checkout',(req,res) =>{
-    const username = req.body.username;
+    const username = req.body.username.trim();
     const sub = req.body.subtotal;
    
 
@@ -65,7 +65,7 @@ router.post('/go-to-checkout',(req,res) =>{
 });
 
 router.post('/confirm-order',(req,res)=>{
-    const username = req.body.username;
+    const username = req.body.username.trim();
     const sub = req.body.subtotal;
 
     createOrder(username,sub,(err,result) =>{
@@ -127,7 +127,7 @@ router.get('/prodpage',(req,res) => {
     const sql = 'SELECT * from fish_inventory where fish_name = ?';
     const status = req.query.LoggedStatus;
     const isLoggedIn = status === 'true';
-    const user = req.query.User;
+    const user = req.query.User.trim();
     const admin1 = req.query.admin;
     const admin = admin1 === 'true';
     connection.query(sql,[fishName],(err,result) =>{
@@ -155,7 +155,7 @@ router.get('/admin_listing',(req,res) => {
     const sql = 'SELECT * from fish_inventory';
     const status = req.query.LoggedStatus;
     const isLoggedIn = status === 'true';
-    const user = req.query.User;
+    const user = req.query.User.trim();
     connection.query(sql,(err,rows) => {
         if(err){
             console.error('Error executing query: ', err);
@@ -180,7 +180,8 @@ router.get('/admin_listing',(req,res) => {
 
 router.post('/remove-fish',(req,res) =>{
     const fishname = req.body.fish_name;
-    const user = req.body.admin;
+   //const user = req.body.admin;
+   const user = req.body.admin.trim(); // Trim the username value
 
     
     removeFish(fishname, (err,result) =>{

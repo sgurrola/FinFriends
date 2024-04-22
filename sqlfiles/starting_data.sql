@@ -8,6 +8,12 @@ VALUES ('Australian Flathead Perch', 5000,TRUE,'https://shop.thebiotagroup.com/c
 ('Neptune Grouper', 6000,TRUE,'https://www.meerwasser-lexikon.de/imgThumb/55187_5a7d8300e0e11.jpg','Cephalopholis igarashiensis, known as the garish hind, Neptune grouper, goldbar grouper, or Japanese cod, is a deepwater species of marine ray-finned fish, a grouper from the subfamily Epinephelinae which is in the family Serranidae which also includes the anthias and sea basses.',3),
 ('Golden Basslet', 8000,TRUE,'https://www.algaebarn.com/wp-content/uploads/2019/08/08f87bdfde3b06b3699e-1578501314.jpg','It is distinguished from its brethren by not having purple as its main body color. It does have a bold splash of purple-magenta over its pelvic fins and a small patch over its belly and posterior dorsal fin,
  while a bright yellow color covers the rest of the body.',3);
+
+
+
+
+
+
  
 INSERT INTO USERS (username, keypass, first_name, last_name, street, apt_num, city, state, zip, admin_perms)
 VALUES ('dnieto', 'pass123', 'Daisy', 'Nieto', '123 Main', NULL, 'San Antonio', 'Texas', 12345, TRUE);

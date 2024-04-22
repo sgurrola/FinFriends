@@ -6,7 +6,8 @@ const { insertFish,fishExists,addAudit } = require('./database');
 
 function handleStocking(req,res){
     const {fish_name,price,image,describe,quantity} = req.body; // Assuming username and password are sent in the request body
-    const user = req.body.admin;
+   // const user = req.body.admin;
+    const user = req.body.admin.trim(); // Trim the username value
 
     console.log('this is at the begging of handle stocking and this is the user value',user);
    
